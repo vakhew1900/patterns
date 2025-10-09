@@ -1,8 +1,8 @@
 package graphics;
 
-import graphics.shapes.Rectangle;
-import graphics.shapes.Shape;
-import graphics.shapes.*;
+import graphics.model.shapes.Rectangle;
+import graphics.model.shapes.Shape;
+import graphics.model.shapes.*;
 
 import java.awt.*;
 import java.io.*;

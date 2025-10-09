@@ -1,7 +1,7 @@
 package graphics.tools;
 
 import graphics.*;
-import graphics.shapes.*;
+import graphics.model.shapes.*;
 
 import java.awt.*;
 import java.awt.event.*;

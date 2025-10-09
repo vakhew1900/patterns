@@ -1,7 +1,7 @@
 package graphics.tools;
 
 import graphics.*;
-import graphics.shapes.Rectangle;
+import graphics.model.shapes.Rectangle;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;

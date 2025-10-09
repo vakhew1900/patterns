@@ -1,4 +1,4 @@
-package graphics.shapes;
+package graphics.model.shapes;
 
 /**
  * Created by Matija on 16 Jun 17.

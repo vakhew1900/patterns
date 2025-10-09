@@ -1,7 +1,7 @@
 package graphics.tools;
 
 import graphics.*;
-import graphics.shapes.Shape;
+import graphics.model.shapes.Shape;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
