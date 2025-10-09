@@ -1,11 +1,15 @@
 package graphics.model.shapes;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.awt.*;
 import java.util.ArrayList;
 
 /**
  * Created by Matija on 12 Jun 17.
  */
+@Getter
 public abstract class Shape {
     protected int lineThick = 1;
     protected Color lineColor = Color.BLACK;
