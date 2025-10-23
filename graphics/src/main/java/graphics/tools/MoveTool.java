@@ -49,7 +49,7 @@ public class MoveTool extends Tool {
     @Override
     public void mousePressed(MouseEvent e) {
         Point fromPos = e.getPoint();
-        Shape newFigure = WorkPanel.drawingView.selectFigure(fromPos);
+        Shape newFigure = WorkPanel.drawing.select(fromPos);
 
         if (figuraToMove != null && newFigure != null) { // Ako postoje i stara i nova selektovana gasimo selektovanost za staru
             figuraToMove.setSelected(false); // Ponistavamo selektovani flag

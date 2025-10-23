@@ -1,5 +1,7 @@
 package graphics;
 
+import graphics.model.Drawing;
+import graphics.model.shapes.Shape;
 import graphics.tools.*;
 import javax.swing.*;
 import java.awt.*;
@@ -7,7 +9,7 @@ import java.awt.event.*;
 
 
 public class WorkPanel extends JPanel {
-    public static DrawingView drawingView = new DrawingView(); // Crtez
+    public static Drawing drawing = new Drawing(); // Crtez
     public static Tool selectedTool = new MoveTool();
 
 
@@ -51,13 +53,13 @@ public class WorkPanel extends JPanel {
             }
         });
     }
-    public WorkPanel(DrawingView drawingView){
-        WorkPanel.drawingView = drawingView;
+    public WorkPanel(Drawing drawing){
+        WorkPanel.drawing = drawing;
     }
 
     // Novi crtez
-    public void openNewDrawing(DrawingView newDrawingView){
-        drawingView = newDrawingView;
+    public void openNewDrawing(Drawing newdrawing){
+        drawing = newdrawing;
     }
 
     // Promena alata
@@ -70,8 +72,12 @@ public class WorkPanel extends JPanel {
         g.setColor(Color.WHITE);
         g.fillRect(0,0,getWidth(), getHeight()); // clear canvas
 
-        if(drawingView != null)
-            drawingView.paintAll(g);
+        if(drawing != null) {
+            Graphics2D graph =  (Graphics2D)g;
+            for(Shape toPaint : drawing){
+                toPaint.paint(graph);
+            }
+        }
     }
 
     public void clear(){

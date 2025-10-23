@@ -29,7 +29,7 @@ public class DrawLineTool extends Tool {
         // nova linija
         assert lineThick.getSelectedItem() != null;
         newLine = new Line(start,end, (int) lineThick.getSelectedItem(), lineColor.getSelectedColor());
-        WorkPanel.drawingView.addFigure(newLine); // dodajemo je odmah
+        WorkPanel.drawing.add(newLine); // dodajemo je odmah
     }
 
     @Override

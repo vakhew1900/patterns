@@ -23,11 +23,11 @@ public abstract class Tool {
     public abstract void mouseDrag(MouseEvent e);
 
     public void undo(){
-        deleteOnUndo.push(WorkPanel.drawingView.popLast()); // Pushujemo na stack brisanih stekom
+        deleteOnUndo.push(WorkPanel.drawing.popLast()); // Pushujemo na stack brisanih stekom
     }
     public void redo(){
         if(!deleteOnUndo.empty()){
-            WorkPanel.drawingView.addFigure(deleteOnUndo.pop()); // Vracamo u crtez
+            WorkPanel.drawing.add(deleteOnUndo.pop()); // Vracamo u crtez
         }
     }
 

@@ -1,10 +1,13 @@
 package graphics;
 
+import graphics.model.Drawing;
+import graphics.support.io.FileService;
 import graphics.tools.*;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
+import java.io.IOException;
 import java.util.*;
 
 /**
@@ -14,6 +17,7 @@ public class MainForm extends JFrame {
 
     // Toolbar elements
     private final JPanel toolbar = new JPanel(new FlowLayout(FlowLayout.LEFT));
+    private final FileService fileService = new FileService();
     public ButtonGroup toolsGroup = new ButtonGroup();
     //public static final String[] toolNames = new String[]{ "Move", "Erase", "Line", "Lines", "Closed Lines", "Rectangle"};
     public static final String[] toolNames = new String[]{ "Move", "Erase", "Line", "Rectangle"};
@@ -74,7 +78,7 @@ public class MainForm extends JFrame {
         // Novi fajl
         JMenuItem newFile = new JMenuItem("New Drawing");
         newFile.addActionListener(e -> {
-            WorkPanel.drawingView.deleteAll();
+            WorkPanel.drawing.deleteAll();
             workPanel.clear();
             workPanel.repaint();
         });
@@ -91,7 +95,11 @@ public class MainForm extends JFrame {
             if(saveFileDialog.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
                 File fileTOSave = saveFileDialog.getSelectedFile();
 
-                WorkPanel.drawingView.saveFile(fileTOSave);
+                try {
+                    fileService.write(fileTOSave,   WorkPanel.drawing);
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         });
         file.add(save);
@@ -104,7 +112,11 @@ public class MainForm extends JFrame {
             if(loadFileDialog.showOpenDialog(this) == JFileChooser.APPROVE_OPTION){
                 File fileToLoad = loadFileDialog.getSelectedFile();
 
-                WorkPanel.drawingView.loadFile(fileToLoad);
+                try {
+                    fileService.read(fileToLoad);
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
                 workPanel.repaint();
             }
         });
@@ -114,7 +126,7 @@ public class MainForm extends JFrame {
         // Close this
         JMenuItem closeThis = new JMenuItem("Close This");
         closeThis.addActionListener(e -> {
-            WorkPanel.drawingView.deleteAll();
+            WorkPanel.drawing.deleteAll();
             workPanel.clear();
             workPanel.repaint();
         });
@@ -193,7 +205,7 @@ public class MainForm extends JFrame {
     }
 
     private void makeCanvas(){
-        DrawingView novi = new DrawingView();
+        Drawing novi = new Drawing();
 
         workPanel.openNewDrawing(novi);
         add(workPanel, BorderLayout.CENTER);

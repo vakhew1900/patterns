@@ -46,7 +46,7 @@ public class DrawingConverter implements Converter<Drawing> {
             }
         }
 
-        return  new Drawing(shapes);
+        return new Drawing(shapes);
     }
 
     private String serializeShape(Shape shape) {

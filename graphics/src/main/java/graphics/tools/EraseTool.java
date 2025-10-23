@@ -27,10 +27,10 @@ public class EraseTool extends Tool {
     public void mouseClicked(MouseEvent e) {
         Point currPoint = e.getPoint();
 
-        Shape toDelete = WorkPanel.drawingView.selectFigure(currPoint);
+        Shape toDelete = WorkPanel.drawing.select(currPoint);
         if(toDelete != null){
             deletedFigures.push(toDelete);
-            WorkPanel.drawingView.deleteFigura(toDelete);
+            WorkPanel.drawing.delete(toDelete);
         }
     }
 
@@ -42,7 +42,7 @@ public class EraseTool extends Tool {
         if(!deletedFigures.empty()){
             Shape popFigura = deletedFigures.pop();
             undeletedFigures.push(popFigura);
-            WorkPanel.drawingView.addFigure(popFigura);
+            WorkPanel.drawing.add(popFigura);
         }
     }
 
@@ -51,7 +51,7 @@ public class EraseTool extends Tool {
         if(!undeletedFigures.empty()) {
             Shape deleteAgain = undeletedFigures.pop();
             deletedFigures.push(deleteAgain);
-            WorkPanel.drawingView.deleteFigura(deleteAgain);
+            WorkPanel.drawing.delete(deleteAgain);
         }
     }
 }

@@ -10,6 +10,12 @@ import java.util.List;
 @AllArgsConstructor
 public class Drawing implements Iterable<Shape> {
     private final List<Shape> shapes;
+    private Stack<Shape> undoFigures = new Stack<>();
+
+
+    public Drawing(List<Shape> shapes) {
+        this.shapes = shapes;
+    }
 
     public Drawing(Shape... figure){
         shapes = new ArrayList<>();
@@ -17,7 +23,10 @@ public class Drawing implements Iterable<Shape> {
         Collections.addAll(shapes, figure);
     }
 
-    public Shape selectFigure(Point coord){
+    public void add(Shape newFigure){
+        shapes.add(newFigure);
+    }
+    public Shape select(Point coord){
 
         int indexFigure = shapes.size() - 1;
 
@@ -32,7 +41,7 @@ public class Drawing implements Iterable<Shape> {
 
         return null;
     }
-    public void deleteFigura(Shape toDelete){
+    public void delete(Shape toDelete){
         int indexFigure = shapes.size() - 1;
 
         // Pronalazimo
@@ -58,4 +67,33 @@ public class Drawing implements Iterable<Shape> {
         return shapes.iterator();
     }
 
+
+    public void undo(){
+        if(!shapes.isEmpty()) {
+            Shape lastFigura = shapes.get(shapes.size() - 1);
+            undoFigures.push(lastFigura);
+            shapes.remove(shapes.size() - 1);
+        }
+    }
+
+
+    public void redo(){
+        if(!undoFigures.empty()){
+            Shape redoFigure = undoFigures.pop();
+            add(redoFigure);
+        }
+    }
+
+    // Dohvatanje poslednje
+    public Shape popLast(){
+        int indexFigure = shapes.size() - 1;
+
+        if(indexFigure >= 0){
+            Shape toReturn = shapes.get(indexFigure);
+            shapes.remove(indexFigure);
+            return toReturn;
+        }
+
+        return null;
+    }
 }
