@@ -1,5 +1,7 @@
 package graphics.model.shapes;
 
+import lombok.Getter;
+
 import java.awt.*;
 import java.util.*;
 
@@ -7,6 +9,7 @@ import java.util.*;
  * Created by Matija on 16 Jun 17.
  */
 public class Rectangle extends Shape {
+    @Getter
     private Point endPoint;
 
     public Rectangle(Point startPoint, Point endPoint, int thick, Color color) {

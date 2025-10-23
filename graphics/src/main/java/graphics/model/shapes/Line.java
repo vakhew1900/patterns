@@ -1,5 +1,7 @@
 package graphics.model.shapes;
 
+import lombok.Getter;
+
 import java.awt.*;
 import java.util.*;
 
@@ -7,6 +9,7 @@ import java.util.*;
  * Created by Matija on 12 Jun 17.
  */
 public class Line extends Shape {
+    @Getter
     private Point endPoint;
 
 

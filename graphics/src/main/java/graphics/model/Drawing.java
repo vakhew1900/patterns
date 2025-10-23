@@ -1,26 +1,28 @@
 package graphics.model;
 
 import graphics.model.shapes.Shape;
+import lombok.AllArgsConstructor;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.*;
+import java.util.List;
 
-public class Drawing {
-    private final ArrayList<Shape> lines;
+@AllArgsConstructor
+public class Drawing implements Iterable<Shape> {
+    private final List<Shape> shapes;
 
     public Drawing(Shape... figure){
-        lines = new ArrayList<>();
+        shapes = new ArrayList<>();
 
-        Collections.addAll(lines, figure);
+        Collections.addAll(shapes, figure);
     }
 
     public Shape selectFigure(Point coord){
 
-        int indexFigure = lines.size() - 1;
+        int indexFigure = shapes.size() - 1;
 
         while(indexFigure >= 0){
-            Shape tempFigura = lines.get(indexFigure);
+            Shape tempFigura = shapes.get(indexFigure);
 
             if(tempFigura.selected(coord))
                 return tempFigura;
@@ -30,13 +32,11 @@ public class Drawing {
 
         return null;
     }
-
-
     public void deleteFigura(Shape toDelete){
-        int indexFigure = lines.size() - 1;
+        int indexFigure = shapes.size() - 1;
 
         // Pronalazimo
-        while (indexFigure >= 0 && lines.get(indexFigure) != toDelete){
+        while (indexFigure >= 0 && shapes.get(indexFigure) != toDelete){
             indexFigure --;
         }
 
@@ -45,11 +45,17 @@ public class Drawing {
             //undoFigures.push(lines.get(indexFigure));
 
             // Brisemo je
-            lines.remove(indexFigure);
+            shapes.remove(indexFigure);
         }
     }
 
     public void deleteAll(){
-        lines.clear();
+        shapes.clear();
     }
+
+    @Override
+    public Iterator<Shape> iterator() {
+        return shapes.iterator();
+    }
+
 }

@@ -6,23 +6,22 @@ import graphics.model.shapes.Rectangle;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-public class LineConverter extends ShapeConverter<Line> {
+public class RectangleConverter extends ShapeConverter<Rectangle> {
 
     @Override
-    public String serialize(Line line) {
+    public String serialize(Rectangle rectangle) {
         StringBuilder retString = new StringBuilder();
 
-        retString.append(super.serialize(line));
+        retString.append(super.serialize(rectangle));
 
-        retString.append(line.getStartPoint().x).append(",").append(line.getStartPoint().y).append(";"); // prva tacka
-        retString.append(line.getEndPoint().x).append(",").append(line.getEndPoint().y).append(";"); // druga tacka
+        retString.append(rectangle.getStartPoint().x).append(",").append(rectangle.getStartPoint().y).append(";"); // prva tacka
+        retString.append(rectangle.getEndPoint().x).append(",").append(rectangle.getEndPoint().y).append(";"); // druga tacka
         return retString.toString();
     }
 
     @Override
-    public Line deserialize(String string) {
+    public Rectangle deserialize(String string) {
         Matcher lineMatcher = LINE_FORMAT.matcher(string);
 
         if(lineMatcher.matches()){
@@ -42,7 +41,7 @@ public class LineConverter extends ShapeConverter<Line> {
                 pointsForFigura.add(new Point(x,y)); // Ubacujemo u listu tacaka
             }
 
-            return new Line(pointsForFigura, lineThick,lineColor);
+            return new Rectangle(pointsForFigura, lineThick,lineColor);
         }
 
         throw new RuntimeException("Illegal format " + string);
