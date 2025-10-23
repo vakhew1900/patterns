@@ -23,7 +23,7 @@ public class DrawRectangleTool extends Tool {
         // nova linija
         assert MainForm.lineThick.getSelectedItem() != null;
         rectangle = new Rectangle(start,end, (int) MainForm.lineThick.getSelectedItem(), MainForm.lineColor.getSelectedColor());
-        WorkPanel.drawing.addFigure(rectangle); // dodajemo je odmah
+        WorkPanel.drawingView.addFigure(rectangle); // dodajemo je odmah
     }
 
     @Override

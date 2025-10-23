@@ -74,7 +74,7 @@ public class MainForm extends JFrame {
         // Novi fajl
         JMenuItem newFile = new JMenuItem("New Drawing");
         newFile.addActionListener(e -> {
-            WorkPanel.drawing.deleteAll();
+            WorkPanel.drawingView.deleteAll();
             workPanel.clear();
             workPanel.repaint();
         });
@@ -91,7 +91,7 @@ public class MainForm extends JFrame {
             if(saveFileDialog.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
                 File fileTOSave = saveFileDialog.getSelectedFile();
 
-                WorkPanel.drawing.saveFile(fileTOSave);
+                WorkPanel.drawingView.saveFile(fileTOSave);
             }
         });
         file.add(save);
@@ -104,7 +104,7 @@ public class MainForm extends JFrame {
             if(loadFileDialog.showOpenDialog(this) == JFileChooser.APPROVE_OPTION){
                 File fileToLoad = loadFileDialog.getSelectedFile();
 
-                WorkPanel.drawing.loadFile(fileToLoad);
+                WorkPanel.drawingView.loadFile(fileToLoad);
                 workPanel.repaint();
             }
         });
@@ -114,7 +114,7 @@ public class MainForm extends JFrame {
         // Close this
         JMenuItem closeThis = new JMenuItem("Close This");
         closeThis.addActionListener(e -> {
-            WorkPanel.drawing.deleteAll();
+            WorkPanel.drawingView.deleteAll();
             workPanel.clear();
             workPanel.repaint();
         });
@@ -193,7 +193,7 @@ public class MainForm extends JFrame {
     }
 
     private void makeCanvas(){
-        Drawing novi = new Drawing();
+        DrawingView novi = new DrawingView();
 
         workPanel.openNewDrawing(novi);
         add(workPanel, BorderLayout.CENTER);

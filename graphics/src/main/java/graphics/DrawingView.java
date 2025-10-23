@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
 /**
  * Created by Matija on 12 Jun 17.
  */
-public class Drawing {
+public class DrawingView {
     private final ArrayList<Shape> lines;
     private BufferedWriter writeToFile;
     private BufferedReader loadToFile;
@@ -34,7 +34,7 @@ public class Drawing {
         //mapTypes.put("grafika.elementi.Zatvorene", new ClosedLines(null, 1, Color.BLACK));
     }
 
-    public Drawing(Shape... figure){
+    public DrawingView(Shape... figure){
         lines = new ArrayList<>();
 
         Collections.addAll(lines, figure);

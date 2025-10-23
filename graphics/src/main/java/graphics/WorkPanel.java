@@ -7,7 +7,7 @@ import java.awt.event.*;
 
 
 public class WorkPanel extends JPanel {
-    public static Drawing drawing = new Drawing(); // Crtez
+    public static DrawingView drawingView = new DrawingView(); // Crtez
     public static Tool selectedTool = new MoveTool();
 
 
@@ -51,13 +51,13 @@ public class WorkPanel extends JPanel {
             }
         });
     }
-    public WorkPanel(Drawing drawing){
-        WorkPanel.drawing = drawing;
+    public WorkPanel(DrawingView drawingView){
+        WorkPanel.drawingView = drawingView;
     }
 
     // Novi crtez
-    public void openNewDrawing(Drawing newDrawing){
-        drawing = newDrawing;
+    public void openNewDrawing(DrawingView newDrawingView){
+        drawingView = newDrawingView;
     }
 
     // Promena alata
@@ -70,8 +70,8 @@ public class WorkPanel extends JPanel {
         g.setColor(Color.WHITE);
         g.fillRect(0,0,getWidth(), getHeight()); // clear canvas
 
-        if(drawing != null)
-            drawing.paintAll(g);
+        if(drawingView != null)
+            drawingView.paintAll(g);
     }
 
     public void clear(){
