@@ -39,7 +39,7 @@ public class DrawingConverter implements Converter<Drawing> {
         List<Shape> shapes = new ArrayList<>();
 
         for(var line : lines) {
-            Matcher lineMatcher = LINE_FORMAT.matcher(string);
+            Matcher lineMatcher = LINE_FORMAT.matcher(line);
             if(lineMatcher.matches()) {
                 String className = lineMatcher.group(1);
                 shapes.add(converters.get(className).deserialize(line));

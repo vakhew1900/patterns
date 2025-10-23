@@ -84,7 +84,6 @@ public class Drawing implements Iterable<Shape> {
         }
     }
 
-    // Dohvatanje poslednje
     public Shape popLast(){
         int indexFigure = shapes.size() - 1;
 

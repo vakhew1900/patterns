@@ -113,7 +113,7 @@ public class MainForm extends JFrame {
                 File fileToLoad = loadFileDialog.getSelectedFile();
 
                 try {
-                    fileService.read(fileToLoad);
+                   WorkPanel.drawing =  fileService.read(fileToLoad);
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }
