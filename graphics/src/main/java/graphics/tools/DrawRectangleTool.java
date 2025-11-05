@@ -2,6 +2,7 @@ package graphics.tools;
 
 import graphics.*;
 import graphics.model.shapes.Rectangle;
+import graphics.model.shapes.ShapeEnum;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -9,21 +10,31 @@ import java.awt.event.MouseEvent;
 /**
  * Created by Matija on 16 Jun 17.
  */
-public class DrawRectangleTool extends Tool {
-    private Rectangle rectangle;
-    private Point start,end;
+public class DrawRectangleTool extends DrawTool {
+
     public DrawRectangleTool(){
         super();
     }
+    @Override
+    public String log() {
+
+        StringBuilder rightLabelTxt = new StringBuilder();
+        Rectangle rectangle = (Rectangle) shape;
+        Point end = rectangle.getEndPoint();
+        Point start = rectangle.getStartPoint();
+
+        int width = Math.abs(end.x - start.x);
+        int height = Math.abs(end.y - start.y);
+
+        rightLabelTxt.append("Width: ").append(width).append(" Height: ").append(height);
+        rightLabelTxt.append(" X: ").append(end.x).append(" Y: ").append(end.y);
+
+        return rightLabelTxt.toString();
+    }
 
     @Override
-    public void mousePressed(MouseEvent e) {
-        end = start = e.getPoint(); // Pocetna tacka ujedno i krajnja
-
-        // nova linija
-        assert MainForm.lineThick.getSelectedItem() != null;
-        rectangle = new Rectangle(start,end, (int) MainForm.lineThick.getSelectedItem(), MainForm.lineColor.getSelectedColor());
-        WorkPanel.drawing.add(rectangle); // dodajemo je odmah
+    public ShapeEnum getType() {
+        return ShapeEnum.RECTANGLE;
     }
 
     @Override
@@ -33,21 +44,4 @@ public class DrawRectangleTool extends Tool {
 
     @Override
     public void mouseClicked(MouseEvent e) {}
-
-    @Override
-    public void mouseDrag(MouseEvent e) {
-        end = e.getPoint();
-
-        rectangle.setEndPoint(end);
-
-        StringBuilder rightLabelTxt = new StringBuilder();
-
-        int width = Math.abs(end.x - start.x);
-        int height = Math.abs(end.y - start.y);
-
-        rightLabelTxt.append("Width: ").append(width).append(" Height: ").append(height);
-        rightLabelTxt.append(" X: ").append(end.x).append(" Y: ").append(end.y);
-
-        MainForm.rightLabel.setText(rightLabelTxt.toString());
-    }
 }
