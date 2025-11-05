@@ -49,6 +49,11 @@ public class Line extends Shape {
     }
 
 
+    @Override
+    public void update(Point point) {
+        setNewEnd(point);
+    }
+
     public void paint(Graphics2D g){
         if(figureSelected) { // Ako je selektovano
             g.setColor(selectionColor);

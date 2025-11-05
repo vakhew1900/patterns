@@ -51,6 +51,12 @@ public class Rectangle extends Shape {
 
 
     @Override
+    public void update(Point point) {
+        System.out.println(point);
+        setEndPoint(point);
+    }
+
+    @Override
     public void paint(Graphics2D g) {
         if(figureSelected){
             g.setColor(selectionColor);

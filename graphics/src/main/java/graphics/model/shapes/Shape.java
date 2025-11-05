@@ -28,6 +28,8 @@ public abstract class Shape {
         lineColor = color;
     }
 
+    public abstract void update(Point point);
+
     public abstract void paint(Graphics2D g); // paint figure
 
     public abstract boolean selected(Point coord); // da li je selektovana
