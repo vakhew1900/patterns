@@ -1,21 +1,31 @@
 package graphics.tools;
 
 import graphics.*;
+import graphics.model.Drawing;
 import graphics.model.shapes.Shape;
+import lombok.Getter;
 
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Stack;
+import java.util.function.Supplier;
 
 /**
  * Created by Matija on 14 Jun 17.
  */
 public abstract class Tool {
 
+    private Supplier<Drawing> supplier ;
     protected Stack<Shape> deleteOnUndo = new Stack<>();
 
     // Konstruktor za singleton
-    public Tool(){}
+    public Tool(Supplier<Drawing> supplier){
+        this.supplier = supplier;
+    }
+
+    public Drawing getDrawing() {
+        return supplier.get();
+    }
 
     public abstract void mousePressed(MouseEvent e);
     public abstract void mouseReleased(MouseEvent e);
@@ -23,11 +33,11 @@ public abstract class Tool {
     public abstract void mouseDrag(MouseEvent e);
 
     public void undo(){
-        deleteOnUndo.push(WorkPanel.drawing.popLast()); // Pushujemo na stack brisanih stekom
+        deleteOnUndo.push(getDrawing().popLast()); // Pushujemo na stack brisanih stekom
     }
     public void redo(){
         if(!deleteOnUndo.empty()){
-            WorkPanel.drawing.add(deleteOnUndo.pop()); // Vracamo u crtez
+            getDrawing().add(deleteOnUndo.pop()); // Vracamo u crtez
         }
     }
 

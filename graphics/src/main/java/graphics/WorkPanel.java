@@ -3,14 +3,21 @@ package graphics;
 import graphics.model.Drawing;
 import graphics.model.shapes.Shape;
 import graphics.tools.*;
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
 
 public class WorkPanel extends JPanel {
-    public static Drawing drawing = new Drawing(); // Crtez
-    public static Tool selectedTool = new MoveTool();
+    @Getter
+    @Setter
+    private Drawing drawing = new Drawing(); // Crtez
+    @Setter
+    @Getter
+    private Tool selectedTool = new MoveTool(this::getDrawing);
 
 
     public WorkPanel(){
@@ -53,10 +60,6 @@ public class WorkPanel extends JPanel {
             }
         });
     }
-    public WorkPanel(Drawing drawing){
-        WorkPanel.drawing = drawing;
-    }
-
     // Novi crtez
     public void openNewDrawing(Drawing newdrawing){
         drawing = newdrawing;

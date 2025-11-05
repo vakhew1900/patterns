@@ -1,5 +1,6 @@
 package graphics.tools;
 
+import graphics.model.Drawing;
 import graphics.model.shapes.Line;
 import graphics.model.shapes.ShapeEnum;
 
@@ -7,17 +8,17 @@ import java.awt.*;
 import java.awt.event.*;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
+import java.util.function.Supplier;
 
 /**
  * Created by Matija on 14 Jun 17.
  */
 public class DrawLineTool extends DrawTool {
 
-    public DrawLineTool(){
-        super();
+
+    public DrawLineTool(Supplier<Drawing> supplier) {
+        super(supplier);
     }
-
-
 
     @Override
     public void mouseReleased(MouseEvent e){

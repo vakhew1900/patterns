@@ -1,21 +1,26 @@
 package graphics.tools;
 
 import graphics.*;
+import graphics.model.Drawing;
 import graphics.model.shapes.Shape;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.util.*;
+import java.util.function.Supplier;
 
 /**
  * Created by Matija on 16 Jun 17.
  */
 public class EraseTool extends Tool {
 
+
     private final Stack<Shape> deletedFigures = new Stack<>();
     private final Stack<Shape> undeletedFigures = new Stack<>();
 
-    public EraseTool(){ super();}
+    public EraseTool(Supplier<Drawing> supplier) {
+        super(supplier);
+    }
 
     @Override
     public void mousePressed(MouseEvent e) {}
@@ -27,10 +32,10 @@ public class EraseTool extends Tool {
     public void mouseClicked(MouseEvent e) {
         Point currPoint = e.getPoint();
 
-        Shape toDelete = WorkPanel.drawing.select(currPoint);
+        Shape toDelete = getDrawing().select(currPoint);
         if(toDelete != null){
             deletedFigures.push(toDelete);
-            WorkPanel.drawing.delete(toDelete);
+            getDrawing().delete(toDelete);
         }
     }
 
@@ -42,7 +47,7 @@ public class EraseTool extends Tool {
         if(!deletedFigures.empty()){
             Shape popFigura = deletedFigures.pop();
             undeletedFigures.push(popFigura);
-            WorkPanel.drawing.add(popFigura);
+            getDrawing().add(popFigura);
         }
     }
 
@@ -51,7 +56,7 @@ public class EraseTool extends Tool {
         if(!undeletedFigures.empty()) {
             Shape deleteAgain = undeletedFigures.pop();
             deletedFigures.push(deleteAgain);
-            WorkPanel.drawing.delete(deleteAgain);
+            getDrawing().delete(deleteAgain);
         }
     }
 }

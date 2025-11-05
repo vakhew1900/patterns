@@ -1,18 +1,24 @@
 package graphics.tools;
 
 import graphics.*;
+import graphics.model.Drawing;
 import graphics.model.shapes.Shape;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Stack;
+import java.util.function.Supplier;
 
 /**
  * Created by Matija on 15 Jun 17.
  */
 public class MoveTool extends Tool {
     private Shape figuraToMove;
+
+    public MoveTool(Supplier<Drawing> supplier) {
+        super(supplier);
+    }
 
 
     // belezenje pomeraja
@@ -40,8 +46,6 @@ public class MoveTool extends Tool {
         }
     }
 
-    public MoveTool(){
-    }
 
     @Override
     public void mouseClicked(MouseEvent e){}
@@ -49,7 +53,7 @@ public class MoveTool extends Tool {
     @Override
     public void mousePressed(MouseEvent e) {
         Point fromPos = e.getPoint();
-        Shape newFigure = WorkPanel.drawing.select(fromPos);
+        Shape newFigure = getDrawing().select(fromPos);
 
         if (figuraToMove != null && newFigure != null) { // Ako postoje i stara i nova selektovana gasimo selektovanost za staru
             figuraToMove.setSelected(false); // Ponistavamo selektovani flag
