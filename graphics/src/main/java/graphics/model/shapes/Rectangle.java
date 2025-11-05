@@ -1,6 +1,8 @@
 package graphics.model.shapes;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.awt.*;
 import java.util.*;
@@ -8,8 +10,10 @@ import java.util.*;
 /**
  * Created by Matija on 16 Jun 17.
  */
+@Getter
+@Setter
+@EqualsAndHashCode
 public class Rectangle extends Shape {
-    @Getter
     private Point endPoint;
 
     public Rectangle(Point startPoint, Point endPoint, int thick, Color color) {
@@ -97,17 +101,5 @@ public class Rectangle extends Shape {
 
     public void setEndPoint(Point newEnd){
         endPoint = newEnd;
-    }
-
-
-    @Override
-    public String saveFormat(){
-        StringBuilder retString = new StringBuilder();
-
-        retString.append(super.saveFormat());
-
-        retString.append(startPoint.x).append(",").append(startPoint.y).append(";"); // prva tacka
-        retString.append(endPoint.x).append(",").append(endPoint.y).append(";"); // druga tacka
-        return retString.toString();
     }
 }

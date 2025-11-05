@@ -1,5 +1,6 @@
 package graphics.model.shapes;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
 import java.awt.*;
@@ -8,6 +9,7 @@ import java.util.*;
 /**
  * Created by Matija on 12 Jun 17.
  */
+@EqualsAndHashCode
 public class Line extends Shape {
     @Getter
     private Point endPoint;
@@ -108,17 +110,6 @@ public class Line extends Shape {
     // Postavljanje novog kraja
     public void setNewEnd(Point newEnd){
         endPoint = newEnd;
-    }
-
-    @Override
-    public String saveFormat(){
-        StringBuilder retString = new StringBuilder();
-
-        retString.append(super.saveFormat());
-
-        retString.append(startPoint.x).append(",").append(startPoint.y).append(";"); // prva tacka
-        retString.append(endPoint.x).append(",").append(endPoint.y).append(";"); // druga tacka
-        return retString.toString();
     }
 
     @Override

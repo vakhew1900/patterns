@@ -213,6 +213,9 @@ public class MainForm extends JFrame {
 
     public static void updateStatus(){
         Color currColor = lineColor.getSelectedColor();
-        leftLabel.setText(currentToolName + " selected, color: rgb(" + currColor.getRed() + ", " + currColor.getGreen() + ", " + currColor.getBlue() + "), thickness: " +  lineThick.getSelectedItem());
+        leftLabel.setText(
+                currentToolName +
+                        " selected, color: rgb(" + currColor.getRed() + ", " + currColor.getGreen() + ", " + currColor.getBlue() + ")" +
+                        ", thickness: " +  lineThick.getSelectedItem());
     }
 }

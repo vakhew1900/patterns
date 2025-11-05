@@ -1,5 +1,6 @@
 package graphics.model.shapes;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,6 +11,8 @@ import java.util.ArrayList;
  * Created by Matija on 12 Jun 17.
  */
 @Getter
+@Setter
+@EqualsAndHashCode
 public abstract class Shape {
     protected int lineThick = 1;
     protected Color lineColor = Color.BLACK;
@@ -36,12 +39,6 @@ public abstract class Shape {
     public abstract void setPoints(ArrayList<Point> points); // Postavi nove tacke
     public abstract ArrayList<Point> getPoints(); // Dohvati tacke
 
-    // Ono sto pamtimo za svaku figuru
-    public String saveFormat(){
-
-        return  getClass().getName() + "(" + lineThick + ","+ lineColor.getRGB() + "):";
-    }
-
     public void setNewCatch(Point catchPos) { // Izracunava relativne kordinate gde ga hvata mis
         deltaStartX = startPoint.x - catchPos.x;
         deltaStartY = startPoint.y - catchPos.y;
@@ -50,15 +47,5 @@ public abstract class Shape {
     // Podesava da li je selektovan
     public void setSelected(boolean select){
         figureSelected = select;
-    }
-
-    // Podesi debljinu
-    public void setLineThick(int thick){
-        lineThick = thick;
-    }
-
-    // Podesi color
-    public void setLineColor(Color color){
-        lineColor = color;
     }
 }
