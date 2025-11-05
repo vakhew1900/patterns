@@ -13,34 +13,23 @@ import java.util.*;
 /**
  * Created by Matija on 10 Jun 17.
  */
-public class MainForm extends JFrame {
+public class MainForm extends JFrame implements ColorChooserButton.ColorChangedListener {
 
     // Toolbar elements
     private final JPanel toolbar = new JPanel(new FlowLayout(FlowLayout.LEFT));
     private final FileService fileService = new FileService();
     public ButtonGroup toolsGroup = new ButtonGroup();
     //public static final String[] toolNames = new String[]{ "Move", "Erase", "Line", "Lines", "Closed Lines", "Rectangle"};
-    public static final String[] toolNames = new String[]{ "Move", "Erase", "Line", "Rectangle"};
-    public static String currentToolName = toolNames[0];
-    public static final JComboBox<Integer> lineThick = new JComboBox<>(new Integer[]{1,2,3,4,5});
-    public static ColorChooserButton lineColor = new ColorChooserButton(Color.BLACK);
+
+
+    private static final String[] toolNames = new String[]{ "Move", "Erase", "Line", "Rectangle"};
+    private String currentToolName = toolNames[0];
+    private final JComboBox<Integer> lineThick = new JComboBox<>(new Integer[]{1,2,3,4,5});
+    private final ColorChooserButton lineColor = new ColorChooserButton(Color.BLACK);
 
     // Canvas elementi
     private static final WorkPanel workPanel = new WorkPanel();
-    // List of tools
-    public static final HashMap<String, Tool> toolsList = new HashMap<>();
-    static{
-        // Unosimo u hesh mapu
-        toolsList.put(toolNames[0], new MoveTool());
-        toolsList.put(toolNames[1], new EraseTool());
-        toolsList.put(toolNames[2], new DrawLineTool());
-        //toolsList.put(toolNames[3], new DrawLinesTool());
-        //toolsList.put(toolNames[4], new DrawClosedLinesTool());
-        toolsList.put(toolNames[3], new DrawRectangleTool());
-
-        // Ako se promeni
-        lineThick.addActionListener((e) -> updateStatus());
-    }
+    private  final Map<String, Tool> toolsList;
 
     // Status bar
     private final JPanel statusbar = new JPanel(new GridLayout(1,2));
@@ -50,6 +39,17 @@ public class MainForm extends JFrame {
 
     public MainForm(){
         super("Vektorska grafika");
+        lineColor.addColorChangedListener(this);
+        DrawLineTool drawLineTool = new DrawLineTool();
+        DrawRectangleTool drawRectangleTool = new DrawRectangleTool();
+
+        toolsList =  Map.of(
+                toolNames[0], new MoveTool(),
+                toolNames[1], new EraseTool(),
+                toolNames[2], drawLineTool,
+                toolNames[3], drawRectangleTool
+        );
+
 
         // Osnovna podesavanja
         setSize(800,800);
@@ -64,6 +64,10 @@ public class MainForm extends JFrame {
         //  Fill status bar
         makeStatus();
 
+        lineColor.addColorChangedListener(drawLineTool);
+        lineColor.addColorChangedListener(drawRectangleTool);
+        lineColor.setSelectedColor(Color.BLACK);
+        lineThick.addActionListener((e) -> updateStatus());
         setVisible(true);
     }
 
@@ -211,11 +215,19 @@ public class MainForm extends JFrame {
         add(workPanel, BorderLayout.CENTER);
     }
 
-    public static void updateStatus(){
+    public void updateStatus(){
         Color currColor = lineColor.getSelectedColor();
         leftLabel.setText(
                 currentToolName +
                         " selected, color: rgb(" + currColor.getRed() + ", " + currColor.getGreen() + ", " + currColor.getBlue() + ")" +
+                        ", thickness: " +  lineThick.getSelectedItem());
+    }
+
+    @Override
+    public void colorChanged(Color color) {
+        leftLabel.setText(
+                currentToolName +
+                        " selected, color: rgb(" + color.getRed() + ", " + color.getGreen() + ", " + color.getBlue() + ")" +
                         ", thickness: " +  lineThick.getSelectedItem());
     }
 }
