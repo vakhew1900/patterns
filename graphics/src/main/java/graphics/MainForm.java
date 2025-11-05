@@ -1,5 +1,8 @@
 package graphics;
 
+import graphics.gui.ColorChooserButton;
+import graphics.gui.LineThickButton;
+import graphics.listener.ColorChangedListener;
 import graphics.model.Drawing;
 import graphics.support.io.FileService;
 import graphics.tools.*;
@@ -13,7 +16,7 @@ import java.util.*;
 /**
  * Created by Matija on 10 Jun 17.
  */
-public class MainForm extends JFrame implements ColorChooserButton.ColorChangedListener {
+public class MainForm extends JFrame implements ColorChangedListener {
 
     // Toolbar elements
     private final JPanel toolbar = new JPanel(new FlowLayout(FlowLayout.LEFT));
@@ -24,7 +27,7 @@ public class MainForm extends JFrame implements ColorChooserButton.ColorChangedL
 
     private static final String[] toolNames = new String[]{ "Move", "Erase", "Line", "Rectangle"};
     private String currentToolName = toolNames[0];
-    private final JComboBox<Integer> lineThick = new JComboBox<>(new Integer[]{1,2,3,4,5});
+    private final LineThickButton lineThick = new LineThickButton(new Integer[]{1,2,3,4,5});
     private final ColorChooserButton lineColor = new ColorChooserButton(Color.BLACK);
 
     // Canvas elementi
@@ -67,7 +70,11 @@ public class MainForm extends JFrame implements ColorChooserButton.ColorChangedL
         lineColor.addColorChangedListener(drawLineTool);
         lineColor.addColorChangedListener(drawRectangleTool);
         lineColor.setSelectedColor(Color.BLACK);
-        lineThick.addActionListener((e) -> updateStatus());
+        lineThick.addLineThickChangedListener(drawLineTool);
+        lineThick.addLineThickChangedListener(drawRectangleTool);
+
+
+
         setVisible(true);
     }
 

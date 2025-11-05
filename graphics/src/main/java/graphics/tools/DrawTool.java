@@ -1,8 +1,9 @@
 package graphics.tools;
 
-import graphics.ColorChooserButton;
+import graphics.listener.ColorChangedListener;
 import graphics.MainForm;
 import graphics.WorkPanel;
+import graphics.listener.LineThickChangedListener;
 import graphics.model.shapes.Shape;
 import graphics.model.shapes.ShapeEnum;
 import graphics.support.fabric.ShapeFabric;
@@ -11,7 +12,7 @@ import lombok.Getter;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 
-public abstract class DrawTool extends Tool implements ColorChooserButton.ColorChangedListener{
+public abstract class DrawTool extends Tool implements ColorChangedListener, LineThickChangedListener {
     @Getter
     private int lineThick = 1;
     @Getter
@@ -39,6 +40,11 @@ public abstract class DrawTool extends Tool implements ColorChooserButton.ColorC
         shape.update(e.getPoint());
 
         MainForm.rightLabel.setText(log());
+    }
+
+    @Override
+    public void lineThickChanged(int lineThick) {
+        this.lineThick = lineThick;
     }
 
     public abstract String log();

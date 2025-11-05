@@ -1,4 +1,6 @@
-package graphics;
+package graphics.gui;
+
+import graphics.listener.ColorChangedListener;
 
 import javax.swing.*;
 import java.awt.*;
@@ -39,10 +41,6 @@ public class ColorChooserButton extends JButton {
                 l.colorChanged(newColor);
             }
         }
-    }
-
-    public interface ColorChangedListener {
-        void colorChanged(Color newColor);
     }
 
     private final ArrayList<ColorChangedListener> listeners = new ArrayList<>();
