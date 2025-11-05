@@ -86,36 +86,4 @@ public class MoveTool extends Tool {
 
         MainForm.rightLabel.setText("X:" + newPoint.getX() + " Y:" + newPoint.getY());
     }
-
-    @Override
-    public void undo() {
-
-        // Undo skida sa steka i primenjuje stare pozicije na novu
-        if(!moves.empty()){
-
-            ShapeMoving shapeMoving = moves.pop();
-
-            // patimo pre undo-a pozicije
-            currentPoints = shapeMoving.movedFigure.getPoints(); // trenutne pamtimo u stare
-            undoMoves.push(new ShapeMoving(shapeMoving.movedFigure, currentPoints));
-
-            // premestamo na stare pozicije
-            shapeMoving.movedFigure.setPoints(shapeMoving.movedPoints);
-        }
-    }
-
-    @Override
-    public void redo() {
-
-        if(!undoMoves.empty()){
-
-            ShapeMoving undoShapeMoving = undoMoves.pop();
-
-            currentPoints = undoShapeMoving.movedFigure.getPoints();
-            moves.push(new ShapeMoving(undoShapeMoving.movedFigure, currentPoints));
-
-            // premestamo na stare pozicije
-            undoShapeMoving.movedFigure.setPoints(undoShapeMoving.movedPoints);
-        }
-    }
 }

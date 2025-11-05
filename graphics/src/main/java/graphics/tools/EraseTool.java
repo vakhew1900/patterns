@@ -41,22 +41,4 @@ public class EraseTool extends Tool {
 
     @Override
     public void mouseDrag(MouseEvent e) {}
-
-    @Override
-    public void undo() {
-        if(!deletedFigures.empty()){
-            Shape popFigura = deletedFigures.pop();
-            undeletedFigures.push(popFigura);
-            getDrawing().add(popFigura);
-        }
-    }
-
-    @Override
-    public void redo() {
-        if(!undeletedFigures.empty()) {
-            Shape deleteAgain = undeletedFigures.pop();
-            deletedFigures.push(deleteAgain);
-            getDrawing().delete(deleteAgain);
-        }
-    }
 }
