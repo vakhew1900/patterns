@@ -57,9 +57,9 @@ public class Drawing implements Iterable<Shape> {
 
     public void undo(){
         if(!shapes.isEmpty()) {
-            Shape lastFigura = shapes.get(shapes.size() - 1);
+            Shape lastFigura = shapes.getLast();
             undoFigures.push(lastFigura);
-            shapes.remove(shapes.size() - 1);
+            shapes.removeLast();
         }
     }
 
