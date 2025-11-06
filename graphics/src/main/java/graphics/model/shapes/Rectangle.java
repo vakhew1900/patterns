@@ -14,12 +14,15 @@ import java.util.*;
 @Setter
 @EqualsAndHashCode
 public class Rectangle extends Shape {
+    @Getter
     private Point endPoint;
+    @Getter
+    private Point startPoint;
 
     public Rectangle(Point startPoint, Point endPoint, int thick, Color color) {
         super(thick, color);
         // Podesavamo tacke
-        super.startPoint = startPoint;
+        this.startPoint = startPoint;
         this.endPoint = endPoint;
     }
 
@@ -98,12 +101,18 @@ public class Rectangle extends Shape {
 
     @Override
     public void moveNew(Point newPos) {
-        Point pointNewStart = new Point(newPos.x + deltaStartX, newPos.y + deltaStartY);
+        Point pointNewStart = new Point(newPos.x + delta.x, newPos.y + delta.y);
         Point newEnd = new Point(pointNewStart.x - startPoint.x + endPoint.x, pointNewStart.y - startPoint.y + endPoint.y);
 
         startPoint = pointNewStart;
         endPoint = newEnd;
     }
+
+    @Override
+    public void setNewCatch(Point catchPos) {
+        delta = new Point(startPoint.x - catchPos.x, startPoint.y - catchPos.y);
+    }
+
 
     public void setEndPoint(Point newEnd){
         endPoint = newEnd;

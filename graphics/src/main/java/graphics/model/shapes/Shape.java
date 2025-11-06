@@ -16,8 +16,7 @@ import java.util.ArrayList;
 public abstract class Shape {
     protected int lineThick = 1;
     protected Color lineColor = Color.BLACK;
-    protected Point startPoint;
-    protected int deltaStartX, deltaStartY; // rastojanje gde je mis uhvatio u odnosu na pocetak
+    protected Point delta; // rastojanje gde je mis uhvatio u odnosu na pocetak
     protected boolean figureSelected;
 
     protected static Color selectionColor = new Color(255,255,0,85);
@@ -41,11 +40,7 @@ public abstract class Shape {
     public abstract void setPoints(ArrayList<Point> points); // Postavi nove tacke
     public abstract ArrayList<Point> getPoints(); // Dohvati tacke
 
-    public void setNewCatch(Point catchPos) { // Izracunava relativne kordinate gde ga hvata mis
-        deltaStartX = startPoint.x - catchPos.x;
-        deltaStartY = startPoint.y - catchPos.y;
-    }
-
+    public abstract void setNewCatch(Point catchPos);
     // Podesava da li je selektovan
     public void setSelected(boolean select){
         figureSelected = select;

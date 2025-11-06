@@ -35,7 +35,6 @@ public abstract class DrawTool extends Tool implements ColorChangedListener, Lin
     @Override
     public void mousePressed(MouseEvent e) {
         assert color != null;
-        System.out.println("fuck");
         shape = new ShapeFabric().createShape(getType(), e.getPoint(), lineThick, color);
         System.out.println(shape);
         getDrawing().add(shape); // dodajemo je odmah

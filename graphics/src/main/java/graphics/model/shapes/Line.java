@@ -13,6 +13,8 @@ import java.util.*;
 public class Line extends Shape {
     @Getter
     private Point endPoint;
+    @Getter
+    private Point startPoint;
 
 
     public Line(Point startPoint, Point endPoint, int thick, Color color){
@@ -46,6 +48,11 @@ public class Line extends Shape {
         retList.add(endPoint);
 
         return retList;
+    }
+
+    @Override
+    public void setNewCatch(Point catchPos) {
+        delta = new Point(startPoint.x - catchPos.x, startPoint.y - catchPos.y);
     }
 
 
@@ -104,7 +111,7 @@ public class Line extends Shape {
     }
     @Override
     public void moveNew(Point newPos){
-        Point pointNewStart = new Point(newPos.x + deltaStartX, newPos.y + deltaStartY);
+        Point pointNewStart = new Point(newPos.x + delta.x, newPos.y + delta.y);
         Point newEnd = new Point(pointNewStart.x - startPoint.x + endPoint.x, pointNewStart.y - startPoint.y + endPoint.y);
 
         startPoint = pointNewStart;
