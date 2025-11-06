@@ -13,9 +13,7 @@ import java.awt.event.*;
 
 public class WorkPanel extends JPanel {
     @Getter
-    @Setter
     private Drawing drawing = new Drawing(); // Crtez
-    @Setter
     @Getter
     private Tool selectedTool = new MoveTool(this::getDrawing);
 
@@ -60,12 +58,11 @@ public class WorkPanel extends JPanel {
             }
         });
     }
-    // Novi crtez
+
     public void openNewDrawing(Drawing newdrawing){
         drawing = newdrawing;
     }
 
-    // Promena alata
     public void changeTool(Tool noviAlat){
         selectedTool = noviAlat;
     }

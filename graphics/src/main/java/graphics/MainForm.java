@@ -127,7 +127,7 @@ public class MainForm extends JFrame implements ColorChangedListener {
                 File fileToLoad = loadFileDialog.getSelectedFile();
 
                 try {
-                   workPanel.setDrawing(fileService.read(fileToLoad));
+                   workPanel.openNewDrawing(fileService.read(fileToLoad));
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }
@@ -191,7 +191,7 @@ public class MainForm extends JFrame implements ColorChangedListener {
 
             // Dodavanje eventa
             newBtn.addActionListener((e) -> {
-                workPanel.setSelectedTool(toolsList.get(toolName));
+                workPanel.changeTool(toolsList.get(toolName));
                 currentToolName = toolName;
                 updateStatus();
             });
@@ -235,9 +235,6 @@ public class MainForm extends JFrame implements ColorChangedListener {
 
     @Override
     public void colorChanged(Color color) {
-        leftLabel.setText(
-                currentToolName +
-                        " selected, color: rgb(" + color.getRed() + ", " + color.getGreen() + ", " + color.getBlue() + ")" +
-                        ", thickness: " +  lineThick.getSelectedItem());
+        updateStatus();
     }
 }
