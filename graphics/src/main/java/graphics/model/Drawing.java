@@ -42,20 +42,7 @@ public class Drawing implements Iterable<Shape> {
         return null;
     }
     public void delete(Shape toDelete){
-        int indexFigure = shapes.size() - 1;
-
-        // Pronalazimo
-        while (indexFigure >= 0 && shapes.get(indexFigure) != toDelete){
-            indexFigure --;
-        }
-
-        if(indexFigure != -1) { // Ako smo pronasli
-            // Ubacujemo na stek
-            //undoFigures.push(lines.get(indexFigure));
-
-            // Brisemo je
-            shapes.remove(indexFigure);
-        }
+        shapes.remove(toDelete);
     }
 
     public void deleteAll(){
@@ -82,17 +69,5 @@ public class Drawing implements Iterable<Shape> {
             Shape redoFigure = undoFigures.pop();
             add(redoFigure);
         }
-    }
-
-    public Shape popLast(){
-        int indexFigure = shapes.size() - 1;
-
-        if(indexFigure >= 0){
-            Shape toReturn = shapes.get(indexFigure);
-            shapes.remove(indexFigure);
-            return toReturn;
-        }
-
-        return null;
     }
 }
