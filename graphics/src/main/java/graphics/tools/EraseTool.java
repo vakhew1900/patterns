@@ -14,9 +14,7 @@ import java.util.function.Supplier;
  */
 public class EraseTool extends Tool {
 
-
     private final Stack<Shape> deletedFigures = new Stack<>();
-    private final Stack<Shape> undeletedFigures = new Stack<>();
 
     public EraseTool(Supplier<Drawing> supplier) {
         super(supplier);
