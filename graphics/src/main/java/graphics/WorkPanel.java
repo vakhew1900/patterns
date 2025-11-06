@@ -13,12 +13,15 @@ import java.awt.event.*;
 
 public class WorkPanel extends JPanel {
     @Getter
-    private Drawing drawing = new Drawing(); // Crtez
+    private Drawing drawing;// Crtez
     @Getter
-    private Tool selectedTool = new MoveTool(this::getDrawing);
+    private Tool selectedTool;
 
 
-    public WorkPanel(){
+    public WorkPanel(Drawing drawing){
+
+        this.drawing = drawing;
+        this.selectedTool = new MoveTool(this::getDrawing);
 
         // Dodavanje eventova
         addMouseListener(new MouseAdapter() {

@@ -31,9 +31,8 @@ public class MainForm extends JFrame implements ColorChangedListener {
     private final LineThickButton lineThick = new LineThickButton(new Integer[]{1,2,3,4,5});
     private final ColorChooserButton lineColor = new ColorChooserButton(Color.BLACK);
 
-    // Canvas elementi
-    private  final WorkPanel workPanel = new WorkPanel();
     private  final Map<String, Tool> toolsList;
+    private  final WorkPanel workPanel;
 
     // Status bar
     private final JPanel statusbar = new JPanel(new GridLayout(1,2));
@@ -42,7 +41,8 @@ public class MainForm extends JFrame implements ColorChangedListener {
     private final PopupDialog aboutDialog = new PopupDialog(this, "About", "© Матија Лукић 2017 ЕТФ Београд");
 
     public MainForm(){
-        super("Vektorska grafika");
+        super("Векторная графика");
+        this.workPanel = new WorkPanel(new Drawing());
         lineColor.addColorChangedListener(this);
         Supplier<Drawing> supplier = workPanel::getDrawing;
         DrawLineTool drawLineTool = new DrawLineTool(supplier);
