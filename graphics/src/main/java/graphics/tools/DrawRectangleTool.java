@@ -1,22 +1,19 @@
 package graphics.tools;
 
-import graphics.*;
-import graphics.model.Drawing;
+import graphics.crud.DrawingService;
 import graphics.model.shapes.Rectangle;
 import graphics.model.shapes.ShapeEnum;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
-import java.util.function.Supplier;
 
 /**
  * Created by Matija on 16 Jun 17.
  */
 public class DrawRectangleTool extends DrawTool {
 
-
-    public DrawRectangleTool(Supplier<Drawing> supplier) {
-        super(supplier);
+    public DrawRectangleTool(DrawingService dao) {
+        super(dao);
     }
 
     @Override

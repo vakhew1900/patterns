@@ -1,5 +1,6 @@
 package graphics;
 
+import graphics.crud.DrawingService;
 import graphics.gui.ColorChooserButton;
 import graphics.gui.LineThickButton;
 import graphics.listener.ColorChangedListener;
@@ -42,16 +43,17 @@ public class MainForm extends JFrame implements ColorChangedListener {
 
     public MainForm(){
         super("Векторная графика");
-        this.workPanel = new WorkPanel(new Drawing());
+        Drawing drawing = new Drawing();
+        DrawingService service = new DrawingService(drawing);
+        this.workPanel = new WorkPanel(service);
         lineColor.addColorChangedListener(this);
-        Supplier<Drawing> supplier = workPanel::getDrawing;
-        DrawLineTool drawLineTool = new DrawLineTool(supplier);
-        DrawRectangleTool drawRectangleTool = new DrawRectangleTool(supplier);
+        DrawLineTool drawLineTool = new DrawLineTool(service);
+        DrawRectangleTool drawRectangleTool = new DrawRectangleTool(service);
 
 
         toolsList =  Map.of(
-                toolNames[0], new MoveTool(supplier),
-                toolNames[1], new EraseTool(supplier),
+                toolNames[0], new MoveTool(service),
+                toolNames[1], new EraseTool(service),
                 toolNames[2], drawLineTool,
                 toolNames[3], drawRectangleTool
         );
@@ -92,9 +94,9 @@ public class MainForm extends JFrame implements ColorChangedListener {
         // Novi fajl
         JMenuItem newFile = new JMenuItem("New Drawing");
         newFile.addActionListener(e -> {
-            workPanel.getDrawing().deleteAll();
-            workPanel.clear();
-            workPanel.repaint();
+            workPanel.getController().deleteAll();
+//            workPanel.clear();
+//            workPanel.repaint();
         });
         file.add(newFile);
         file.addSeparator();
@@ -110,7 +112,7 @@ public class MainForm extends JFrame implements ColorChangedListener {
                 File fileTOSave = saveFileDialog.getSelectedFile();
 
                 try {
-                    fileService.write(fileTOSave, workPanel.getDrawing());
+                    fileService.write(fileTOSave, workPanel.getController().getDrawing());
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }
@@ -131,7 +133,7 @@ public class MainForm extends JFrame implements ColorChangedListener {
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }
-                workPanel.repaint();
+//                workPanel.repaint();
             }
         });
         file.add(load);
@@ -140,9 +142,9 @@ public class MainForm extends JFrame implements ColorChangedListener {
         // Close this
         JMenuItem closeThis = new JMenuItem("Close This");
         closeThis.addActionListener(e -> {
-            workPanel.getDrawing().deleteAll();
-            workPanel.clear();
-            workPanel.repaint();
+            workPanel.getController().deleteAll();
+//            workPanel.clear();
+//            workPanel.repaint();
         });
         file.add(closeThis);
 
@@ -159,12 +161,12 @@ public class MainForm extends JFrame implements ColorChangedListener {
         JMenuItem redo = new JMenuItem("Redo");
 
         undo.addActionListener(e -> {
-            workPanel.getDrawing().undo();
-            workPanel.repaint();
+            workPanel.getController().getDrawing().undo();
+//            workPanel.repaint();
         });
         redo.addActionListener(e -> {
-            workPanel.getDrawing().redo();
-            workPanel.repaint();
+            workPanel.getController().getDrawing().redo();
+//            workPanel.repaint();
         });
         help.add(undo);
         help.add(redo);

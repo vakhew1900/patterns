@@ -1,30 +1,26 @@
 package graphics.tools;
 
 import graphics.*;
-import graphics.model.Drawing;
+import graphics.crud.DrawingService;
 import graphics.model.shapes.Shape;
 import lombok.Getter;
 
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Stack;
-import java.util.function.Supplier;
 
 /**
  * Created by Matija on 14 Jun 17.
  */
 public abstract class Tool {
 
-    private Supplier<Drawing> supplier ;
+    @Getter
+    private DrawingService dao;
     protected Stack<Shape> deleteOnUndo = new Stack<>();
 
     // Konstruktor za singleton
-    public Tool(Supplier<Drawing> supplier){
-        this.supplier = supplier;
-    }
-
-    public Drawing getDrawing() {
-        return supplier.get();
+    public Tool(DrawingService dao){
+        this.dao = dao;
     }
 
     public abstract void mousePressed(MouseEvent e);

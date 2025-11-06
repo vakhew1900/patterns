@@ -1,10 +1,9 @@
 package graphics.tools;
 
+import graphics.crud.DrawingService;
 import graphics.listener.ColorChangedListener;
 import graphics.MainForm;
-import graphics.WorkPanel;
 import graphics.listener.LineThickChangedListener;
-import graphics.model.Drawing;
 import graphics.model.shapes.Shape;
 import graphics.model.shapes.ShapeEnum;
 import graphics.support.fabric.ShapeFabric;
@@ -12,7 +11,6 @@ import lombok.Getter;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
-import java.util.function.Supplier;
 
 public abstract class DrawTool extends Tool implements ColorChangedListener, LineThickChangedListener {
     @Getter
@@ -21,10 +19,9 @@ public abstract class DrawTool extends Tool implements ColorChangedListener, Lin
     private Color color;
     protected Shape shape;
 
-    public DrawTool(Supplier<Drawing> supplier) {
-        super(supplier);
+    public DrawTool(DrawingService dao) {
+        super(dao);
     }
-
 
     @Override
     public void colorChanged(Color color) {
@@ -37,13 +34,12 @@ public abstract class DrawTool extends Tool implements ColorChangedListener, Lin
         assert color != null;
         shape = new ShapeFabric().createShape(getType(), e.getPoint(), lineThick, color);
         System.out.println(shape);
-        getDrawing().add(shape); // dodajemo je odmah
+        getDao().add(shape); // dodajemo je odmah
     }
 
     @Override
     public void mouseDrag(MouseEvent e) {
-        shape.update(e.getPoint());
-
+        getDao().update(shape, e.getPoint());
         MainForm.rightLabel.setText(log());
     }
 

@@ -26,6 +26,12 @@ public class Drawing implements Iterable<Shape> {
     public void add(Shape newFigure){
         shapes.add(newFigure);
     }
+
+    public void addAll(Drawing drawing){
+        shapes.addAll(drawing.shapes);
+    }
+
+
     public Shape select(Point coord){
 
         int indexFigure = shapes.size() - 1;
@@ -69,5 +75,14 @@ public class Drawing implements Iterable<Shape> {
             Shape redoFigure = undoFigures.pop();
             add(redoFigure);
         }
+    }
+
+    public void copy(Drawing newdrawing) {
+        deleteAll();;
+        shapes.addAll(newdrawing.shapes);
+    }
+
+    public boolean contains(Shape shape) {
+        return shapes.contains(shape);
     }
 }

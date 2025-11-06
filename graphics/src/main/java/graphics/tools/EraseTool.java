@@ -1,23 +1,17 @@
 package graphics.tools;
 
-import graphics.*;
-import graphics.model.Drawing;
-import graphics.model.shapes.Shape;
+import graphics.crud.DrawingService;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
-import java.util.*;
-import java.util.function.Supplier;
 
 /**
  * Created by Matija on 16 Jun 17.
  */
 public class EraseTool extends Tool {
 
-    private final Stack<Shape> deletedFigures = new Stack<>();
-
-    public EraseTool(Supplier<Drawing> supplier) {
-        super(supplier);
+    public EraseTool(DrawingService dao) {
+        super(dao);
     }
 
     @Override
@@ -29,12 +23,7 @@ public class EraseTool extends Tool {
     @Override
     public void mouseClicked(MouseEvent e) {
         Point currPoint = e.getPoint();
-
-        Shape toDelete = getDrawing().select(currPoint);
-        if(toDelete != null){
-            deletedFigures.push(toDelete);
-            getDrawing().delete(toDelete);
-        }
+        getDao().delete(currPoint);
     }
 
     @Override

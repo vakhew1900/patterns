@@ -1,6 +1,7 @@
 package graphics.tools;
 
 import graphics.*;
+import graphics.crud.DrawingService;
 import graphics.model.Drawing;
 import graphics.model.shapes.Shape;
 
@@ -16,8 +17,8 @@ import java.util.function.Supplier;
 public class MoveTool extends Tool {
     private Shape figuraToMove;
 
-    public MoveTool(Supplier<Drawing> supplier) {
-        super(supplier);
+    public MoveTool(DrawingService dao) {
+        super(dao);
     }
 
 
@@ -32,20 +33,6 @@ public class MoveTool extends Tool {
     }
 
     private final Stack<ShapeMoving> moves = new Stack<>();
-    private final Stack<ShapeMoving> undoMoves = new Stack<>();
-
-    private ArrayList<Point> currentPoints;
-
-    private void savePoints(){ // Pamtimo u curr point kloniranu
-        if(figuraToMove != null){
-            currentPoints = new ArrayList<>();
-
-            for(Point currPoint : figuraToMove.getPoints()){
-                currentPoints.add((Point)currPoint.clone());
-            }
-        }
-    }
-
 
     @Override
     public void mouseClicked(MouseEvent e){}
@@ -53,22 +40,18 @@ public class MoveTool extends Tool {
     @Override
     public void mousePressed(MouseEvent e) {
         Point fromPos = e.getPoint();
-        Shape newFigure = getDrawing().select(fromPos);
+        Shape newFigure = getDao().get(fromPos);
 
         if (figuraToMove != null && newFigure != null) { // Ako postoje i stara i nova selektovana gasimo selektovanost za staru
-            figuraToMove.setSelected(false); // Ponistavamo selektovani flag
+            getDao().select(figuraToMove, false); // Ponistavamo selektovani flag
         }
 
         if (newFigure != null) { // Ako postoji nova figura selektujemo nju
-            figuraToMove = newFigure;
-            figuraToMove.setSelected(true); // selektovan je novi
+            figuraToMove = newFigure;  figuraToMove.setSelected(true); // selektovan je novi
+            getDao().select(figuraToMove, true); // P
         }
 
-        if (figuraToMove != null) { // Ako postoji selektovana figura hvatamo njen catch
-            // Pamtimo figuru i stare pozicije na stek
-            savePoints();
-            moves.push(new ShapeMoving(figuraToMove, currentPoints));
-
+        if (figuraToMove != null) {
             figuraToMove.setNewCatch(fromPos);
         }
     }
@@ -80,9 +63,7 @@ public class MoveTool extends Tool {
     public void mouseDrag(MouseEvent e){
         Point newPoint = e.getPoint();
         System.out.println("Firua koju pomeramo : " + figuraToMove);
-        if(figuraToMove != null) {
-            figuraToMove.moveNew(newPoint);
-        }
+        getDao().moveNew(figuraToMove, newPoint);
 
         MainForm.rightLabel.setText("X:" + newPoint.getX() + " Y:" + newPoint.getY());
     }
