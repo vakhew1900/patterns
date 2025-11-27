@@ -12,6 +12,8 @@ import java.awt.event.MouseEvent;
  */
 public class DrawRectangleTool extends DrawTool {
 
+    public static final String NAME = "Rectangle";
+
     public DrawRectangleTool(DrawingService dao) {
         super(dao);
     }
@@ -41,4 +43,9 @@ public class DrawRectangleTool extends DrawTool {
 
     @Override
     public void mouseClicked(MouseEvent e) {}
+
+    @Override
+    public String getName() {
+        return NAME;
+    }
 }

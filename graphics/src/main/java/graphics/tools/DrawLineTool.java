@@ -14,6 +14,8 @@ import java.text.DecimalFormat;
  */
 public class DrawLineTool extends DrawTool {
 
+    public static final String NAME = "Line";
+
     public DrawLineTool(DrawingService dao) {
         super(dao);
     }
@@ -42,5 +44,10 @@ public class DrawLineTool extends DrawTool {
     @Override
     public ShapeEnum getType() {
         return ShapeEnum.LINE;
+    }
+
+    @Override
+    public String getName() {
+        return NAME;
     }
 }

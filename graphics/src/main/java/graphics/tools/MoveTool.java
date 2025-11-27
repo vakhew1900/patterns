@@ -16,6 +16,9 @@ import java.util.Stack;
  * Created by Matija on 15 Jun 17.
  */
 public class MoveTool extends Tool {
+
+    public static final String NAME = "Move";
+
     private Shape figuraToMove;
 
     public MoveTool(DrawingService dao) {
@@ -73,5 +76,10 @@ public class MoveTool extends Tool {
 
         MainForm.rightLabel.setText("X:" + e.getPoint().getX() + " Y:" + e.getPoint().getY());
 
+    }
+
+    @Override
+    public String getName() {
+        return NAME;
     }
 }

@@ -1,6 +1,7 @@
 package graphics;
 
 import graphics.command.CommandContainer;
+import graphics.controller.ToolController;
 import graphics.crud.DrawingService;
 import graphics.gui.ColorChooserButton;
 import graphics.gui.LineThickButton;
@@ -27,49 +28,48 @@ public class MainForm extends JFrame implements ColorChangedListener {
     //public static final String[] toolNames = new String[]{ "Move", "Erase", "Line", "Lines", "Closed Lines", "Rectangle"};
 
 
-    private static final String[] toolNames = new String[]{ "Move", "Erase", "Line", "Rectangle"};
-    private String currentToolName = toolNames[0];
     private final LineThickButton lineThick = new LineThickButton(new Integer[]{1,2,3,4,5});
     private final ColorChooserButton lineColor = new ColorChooserButton(Color.BLACK);
 
-    private  final Map<String, Tool> toolsList;
-    private  final WorkPanel workPanel;
+    private final WorkPanel workPanel;
+    private final ToolController toolController;
 
     // Status bar
     private final JPanel statusbar = new JPanel(new GridLayout(1,2));
     public static JLabel leftLabel, rightLabel;
 
     private final PopupDialog aboutDialog = new PopupDialog(this, "About", "© Матија Лукић 2017 ЕТФ Београд");
+    private String currentToolName;
 
     public MainForm(){
         super("Векторная графика");
         Drawing drawing = new Drawing();
         DrawingService service = new DrawingService(drawing);
-        this.workPanel = new WorkPanel(service);
         lineColor.addColorChangedListener(this);
         DrawLineTool drawLineTool = new DrawLineTool(service);
         DrawRectangleTool drawRectangleTool = new DrawRectangleTool(service);
+        EraseTool eraseTool = new EraseTool(service);
+        MoveTool moveTool = new MoveTool(service);
 
+        toolController = new ToolController();
+        toolController.registerTool(drawLineTool);
+        toolController.registerTool(eraseTool);
+        toolController.registerTool(moveTool);
+        toolController.registerTool(drawRectangleTool);
 
-        toolsList =  Map.of(
-                toolNames[0], new MoveTool(service),
-                toolNames[1], new EraseTool(service),
-                toolNames[2], drawLineTool,
-                toolNames[3], drawRectangleTool
-        );
+        currentToolName = DrawLineTool.NAME;
+        toolController.setCurrentTool(currentToolName);
+
+        this.workPanel = new WorkPanel(service, toolController);
 
 
         // Osnovna podesavanja
         setSize(800,800);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        // Fill menu
         makeMenu();
-        // Fill toolbar
-        makeTools();
-        // Fill canvas
+        makeTools(toolController.getRegisteredTools());
         makeCanvas();
-        //  Fill status bar
         makeStatus();
 
         lineColor.addColorChangedListener(drawLineTool);
@@ -77,7 +77,6 @@ public class MainForm extends JFrame implements ColorChangedListener {
         lineColor.setSelectedColor(Color.BLACK);
         lineThick.addLineThickChangedListener(drawLineTool);
         lineThick.addLineThickChangedListener(drawRectangleTool);
-
 
 
         setVisible(true);
@@ -179,7 +178,7 @@ public class MainForm extends JFrame implements ColorChangedListener {
     }
 
     // Fill the toolbar
-    private void makeTools(){
+    private void makeTools(Set<String> toolNames){
         toolbar.setBackground(Color.WHITE);
         toolbar.add(new JLabel("Tools:"));
 
@@ -191,7 +190,7 @@ public class MainForm extends JFrame implements ColorChangedListener {
 
             // Dodavanje eventa
             newBtn.addActionListener((e) -> {
-                workPanel.changeTool(toolsList.get(toolName));
+                toolController.setCurrentTool(toolName);
                 currentToolName = toolName;
                 updateStatus();
             });
@@ -209,7 +208,7 @@ public class MainForm extends JFrame implements ColorChangedListener {
         statusbar.setBackground(Color.LIGHT_GRAY);
 
         // Postavljanje labela
-        leftLabel = new JLabel(toolNames[0] + " selected", JLabel.LEFT);
+        leftLabel = new JLabel( currentToolName + " selected", JLabel.LEFT);
         updateStatus();
         rightLabel = new JLabel("", JLabel.RIGHT);
         statusbar.add(leftLabel);

@@ -1,5 +1,6 @@
 package graphics;
 
+import graphics.controller.ToolController;
 import graphics.crud.DrawingService;
 import graphics.listener.DrawingChangedListener;
 import graphics.model.Drawing;
@@ -15,57 +16,21 @@ import java.awt.event.*;
 public class WorkPanel extends JPanel implements DrawingChangedListener {
     @Getter
     private DrawingService drawingService;// Crtez
-    @Getter
-    private Tool selectedTool;
+    private final ToolController toolController;
 
 
-    public WorkPanel(DrawingService drawingService){
+    public WorkPanel(DrawingService drawingService, ToolController toolController){
 
         this.drawingService = drawingService;
         this.drawingService.addListener(this);
-        this.selectedTool = new MoveTool(this.drawingService);
+        this.toolController = toolController;
 
-        // Dodavanje eventova
-        addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                super.mousePressed(e);
-                selectedTool.mousePressed(e);
-            }
-            @Override
-            public void mouseReleased(MouseEvent e) {
-                super.mouseReleased(e);
-                selectedTool.mouseReleased(e);
-            }
-
-            @Override
-            public void mouseClicked(MouseEvent e){
-                super.mouseClicked(e);
-                System.out.println("Clicked mouse");
-                selectedTool.mouseClicked(e);
-            }
-        });
-
-        addMouseMotionListener(new MouseAdapter() {
-            @Override
-            public void mouseMoved(MouseEvent e) {
-                super.mouseMoved(e);
-                selectedTool.mouseMove(e);
-            }
-            @Override
-            public void mouseDragged(MouseEvent e){
-                super.mouseDragged(e);
-                selectedTool.mouseDrag(e);
-            }
-        });
+        addMouseListener(this.toolController);
+        addMouseMotionListener(this.toolController);
     }
 
     public void openNewDrawing(Drawing newdrawing){
         drawingService.repaintDrawing(newdrawing);
-    }
-
-    public void changeTool(Tool noviAlat){
-        selectedTool = noviAlat;
     }
 
     @Override

@@ -31,4 +31,6 @@ public abstract class Tool {
         Point currPoint = e.getPoint();
         MainForm.rightLabel.setText("X:" + currPoint.getX() + " Y:" + currPoint.getY());
     }
+
+    public abstract String getName();
 }

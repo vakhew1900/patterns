@@ -12,6 +12,8 @@ import java.awt.event.MouseEvent;
  */
 public class EraseTool extends Tool {
 
+    public static final String NAME = "Erase";
+
     public EraseTool(DrawingService service) {
         super(service);
     }
@@ -32,4 +34,9 @@ public class EraseTool extends Tool {
 
     @Override
     public void mouseDrag(MouseEvent e) {}
+
+    @Override
+    public String getName() {
+        return NAME;
+    }
 }
