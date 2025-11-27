@@ -26,7 +26,6 @@ public class MoveTool extends Tool {
     }
 
 
-    // belezenje pomeraja
     public static class ShapeMoving {
         Shape movedFigure;
         ArrayList<Point> movedPoints;
