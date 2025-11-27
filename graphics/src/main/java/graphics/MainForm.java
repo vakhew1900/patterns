@@ -58,8 +58,6 @@ public class MainForm extends JFrame implements ColorChangedListener {
 
         this.workPanel = new WorkPanel(service, toolController);
 
-
-        // Osnovna podesavanja
         setSize(800,800);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -73,7 +71,6 @@ public class MainForm extends JFrame implements ColorChangedListener {
         lineColor.setSelectedColor(Color.BLACK);
         lineThick.addLineThickChangedListener(drawLineTool);
         lineThick.addLineThickChangedListener(drawRectangleTool);
-
 
         setVisible(true);
     }
