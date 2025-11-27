@@ -11,7 +11,7 @@ public class MoveCommand extends DrawingCommand{
     private final Point point;
 
     public MoveCommand(DrawingService drawingService, boolean isHistoryNeed, Shape shape, Point point) {
-        super(drawingService, isHistoryNeed);
+        super(drawingService, false);
         this.shape = shape;
         this.point = point;
     }

@@ -24,8 +24,10 @@ public class EraseTool extends Tool {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        CommandContainer.getInstance()
-                .executeCommand(new EraseCommand(getService(), e.getPoint()));
+        if (getService().get(e.getPoint()) != null) {
+            CommandContainer.getInstance()
+                    .executeCommand(new EraseCommand(getService(), e.getPoint()));
+        }
     }
 
     @Override

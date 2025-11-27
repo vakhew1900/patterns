@@ -45,7 +45,7 @@ public abstract class DrawTool extends Tool implements ColorChangedListener, Lin
     @Override
     public void mouseDrag(MouseEvent e) {
         CommandContainer.getInstance().executeCommand(
-                new DrawShapeCommand(getService(), false, shape, e.getPoint())
+                new DrawShapeCommand(getService(), shape, e.getPoint())
         );
         MainForm.rightLabel.setText(log());
     }
@@ -53,7 +53,7 @@ public abstract class DrawTool extends Tool implements ColorChangedListener, Lin
     @Override
     public void mouseReleased(MouseEvent e) {
         CommandContainer.getInstance().executeCommand(
-                new DrawShapeCommand(getService(), true, shape, e.getPoint())
+                new DrawShapeCommand(getService(), shape, e.getPoint())
         );
         MainForm.rightLabel.setText(log());
     }

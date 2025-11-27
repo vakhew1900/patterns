@@ -9,8 +9,8 @@ public class DrawShapeCommand extends DrawingCommand {
 
     private final Shape shape;
     private final Point point;
-    public DrawShapeCommand(DrawingService drawingService,boolean isHistoryNeed, Shape shape, Point point) {
-        super(drawingService, isHistoryNeed);
+    public DrawShapeCommand(DrawingService drawingService, Shape shape, Point point) {
+        super(drawingService, false);
         this.shape = shape;
         this.point = point;
     }

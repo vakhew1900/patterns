@@ -3,6 +3,7 @@ package graphics.tools;
 import graphics.*;
 import graphics.command.CommandContainer;
 import graphics.command.MoveCommand;
+import graphics.command.SelectMovingShapeCommand;
 import graphics.crud.DrawingService;
 import graphics.model.shapes.Shape;
 
@@ -51,9 +52,9 @@ public class MoveTool extends Tool {
             getService().select(figuraToMove, true); // P
         }
 
-        if (figuraToMove != null) {
-            figuraToMove.setNewCatch(fromPos);
-        }
+        CommandContainer
+                .getInstance()
+                .executeCommand(new SelectMovingShapeCommand(getService(), figuraToMove, fromPos));
     }
 
     @Override
