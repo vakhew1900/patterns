@@ -1,6 +1,6 @@
 package graphics.command;
 
-public interface isHistoryNeedable {
+public interface isHistoryNeedle {
 
     boolean isNeedHistory();
 }

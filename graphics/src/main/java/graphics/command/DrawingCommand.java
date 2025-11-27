@@ -2,9 +2,8 @@ package graphics.command;
 
 import graphics.crud.DrawingService;
 import graphics.model.Drawing;
-import lombok.Getter;
 
-public abstract class DrawingCommand implements Command, isHistoryNeedable {
+public abstract class DrawingCommand implements Command, isHistoryNeedle {
 
     protected final DrawingService drawingService;
     private final Drawing.DrawingMemento backup;
