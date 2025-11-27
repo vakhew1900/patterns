@@ -20,7 +20,6 @@ public class WorkPanel extends JPanel implements DrawingChangedListener {
     private final DrawingService drawingService;// Crtez
 
     public WorkPanel(DrawingService drawingService, ToolController toolController){
-
         this.drawingService = drawingService;
         this.drawingService.addListener(this);
 
