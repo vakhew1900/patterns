@@ -15,20 +15,18 @@ import java.awt.*;
 import java.awt.event.*;
 
 
+@Getter
 public class WorkPanel extends JPanel implements DrawingChangedListener {
-    @Getter
-    private DrawingService drawingService;// Crtez
-    private final ToolController toolController;
+    private final DrawingService drawingService;// Crtez
 
 
     public WorkPanel(DrawingService drawingService, ToolController toolController){
 
         this.drawingService = drawingService;
         this.drawingService.addListener(this);
-        this.toolController = toolController;
 
-        addMouseListener(this.toolController);
-        addMouseMotionListener(this.toolController);
+        addMouseListener(toolController);
+        addMouseMotionListener(toolController);
     }
 
     public void openNewDrawing(Drawing newdrawing){
