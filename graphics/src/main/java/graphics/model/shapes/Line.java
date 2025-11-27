@@ -5,15 +5,15 @@ import lombok.Getter;
 
 import java.awt.*;
 import java.util.*;
+import java.util.List;
 
 /**
  * Created by Matija on 12 Jun 17.
  */
-@EqualsAndHashCode
+@Getter
+@EqualsAndHashCode(callSuper = true)
 public class Line extends Shape {
-    @Getter
     private Point endPoint;
-    @Getter
     private Point startPoint;
 
 
@@ -24,7 +24,7 @@ public class Line extends Shape {
         this.endPoint = endPoint;
     }
 
-    public Line(ArrayList<Point> points, int thick, Color color) {
+    public Line(List<Point> points, int thick, Color color) {
         super(thick, color);
 
         if (points != null) {
@@ -127,5 +127,10 @@ public class Line extends Shape {
     @Override
     public String toString(){
         return "lineThick: " + lineThick + " color:" + lineColor.toString() + " start:" + startPoint + " end:" + endPoint + " ---- selected";
+    }
+
+    @Override
+    public Line clone() {
+        return new Line(List.of((Point) startPoint.clone(), (Point) endPoint.clone()), this.getLineThick(), new Color(getLineColor().getRGB()));
     }
 }

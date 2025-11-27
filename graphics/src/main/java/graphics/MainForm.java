@@ -1,5 +1,6 @@
 package graphics;
 
+import graphics.command.CommandContainer;
 import graphics.crud.DrawingService;
 import graphics.gui.ColorChooserButton;
 import graphics.gui.LineThickButton;
@@ -13,7 +14,6 @@ import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
-import java.util.function.Supplier;
 
 /**
  * Created by Matija on 10 Jun 17.
@@ -94,7 +94,7 @@ public class MainForm extends JFrame implements ColorChangedListener {
         // Novi fajl
         JMenuItem newFile = new JMenuItem("New Drawing");
         newFile.addActionListener(e -> {
-            workPanel.getController().deleteAll();
+            workPanel.getDrawingService().deleteAll();
 //            workPanel.clear();
 //            workPanel.repaint();
         });
@@ -112,7 +112,7 @@ public class MainForm extends JFrame implements ColorChangedListener {
                 File fileTOSave = saveFileDialog.getSelectedFile();
 
                 try {
-                    fileService.write(fileTOSave, workPanel.getController().getDrawing());
+                    fileService.write(fileTOSave, workPanel.getDrawingService().getDrawing());
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }
@@ -142,7 +142,7 @@ public class MainForm extends JFrame implements ColorChangedListener {
         // Close this
         JMenuItem closeThis = new JMenuItem("Close This");
         closeThis.addActionListener(e -> {
-            workPanel.getController().deleteAll();
+            workPanel.getDrawingService().deleteAll();
 //            workPanel.clear();
 //            workPanel.repaint();
         });
@@ -161,12 +161,10 @@ public class MainForm extends JFrame implements ColorChangedListener {
         JMenuItem redo = new JMenuItem("Redo");
 
         undo.addActionListener(e -> {
-            workPanel.getController().getDrawing().undo();
-//            workPanel.repaint();
+            CommandContainer.getInstance().undo();
         });
         redo.addActionListener(e -> {
-            workPanel.getController().getDrawing().redo();
-//            workPanel.repaint();
+            CommandContainer.getInstance().redo();
         });
         help.add(undo);
         help.add(redo);

@@ -12,11 +12,10 @@ import java.util.*;
  */
 @Getter
 @Setter
-@EqualsAndHashCode
-public class Rectangle extends Shape {
-    @Getter
+@EqualsAndHashCode(callSuper = true)
+public class Rectangle extends Shape  {
+    @Setter
     private Point endPoint;
-    @Getter
     private Point startPoint;
 
     public Rectangle(Point startPoint, Point endPoint, int thick, Color color) {
@@ -113,8 +112,8 @@ public class Rectangle extends Shape {
         delta = new Point(startPoint.x - catchPos.x, startPoint.y - catchPos.y);
     }
 
-
-    public void setEndPoint(Point newEnd){
-        endPoint = newEnd;
+    @Override
+    public Rectangle clone() {
+        return new Rectangle((Point) startPoint.clone(), (Point) endPoint.clone(), lineThick, new Color(lineColor.getRGB()));
     }
 }

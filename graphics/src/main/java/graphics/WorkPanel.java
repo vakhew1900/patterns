@@ -14,16 +14,16 @@ import java.awt.event.*;
 
 public class WorkPanel extends JPanel implements DrawingChangedListener {
     @Getter
-    private DrawingService controller;// Crtez
+    private DrawingService drawingService;// Crtez
     @Getter
     private Tool selectedTool;
 
 
     public WorkPanel(DrawingService drawingService){
 
-        this.controller = drawingService;
-        controller.addListener(this);
-        this.selectedTool = new MoveTool(controller);
+        this.drawingService = drawingService;
+        this.drawingService.addListener(this);
+        this.selectedTool = new MoveTool(this.drawingService);
 
         // Dodavanje eventova
         addMouseListener(new MouseAdapter() {
@@ -61,7 +61,7 @@ public class WorkPanel extends JPanel implements DrawingChangedListener {
     }
 
     public void openNewDrawing(Drawing newdrawing){
-        controller.repaintDrawing(newdrawing);
+        drawingService.repaintDrawing(newdrawing);
     }
 
     public void changeTool(Tool noviAlat){
@@ -73,19 +73,13 @@ public class WorkPanel extends JPanel implements DrawingChangedListener {
         g.setColor(Color.WHITE);
         g.fillRect(0,0,getWidth(), getHeight()); // clear canvas
 
-        if(controller.getDrawing() != null) {
+        if(drawingService.getDrawing() != null) {
             Graphics2D graph =  (Graphics2D)g;
-            for(Shape toPaint : controller.getDrawing()){
+            for(Shape toPaint : drawingService.getDrawing()){
                 toPaint.paint(graph);
             }
         }
     }
-
-//    public void clear(){
-//        Graphics g = getGraphics();
-//
-//        g.clearRect(0,0, getWidth(), getHeight());
-//    }
 
     @Override
     public void drawingChanged() {

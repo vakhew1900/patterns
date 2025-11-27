@@ -13,7 +13,7 @@ import java.util.ArrayList;
 @Getter
 @Setter
 @EqualsAndHashCode
-public abstract class Shape {
+public abstract class Shape implements Cloneable{
     protected int lineThick = 1;
     protected Color lineColor = Color.BLACK;
     protected Point delta; // rastojanje gde je mis uhvatio u odnosu na pocetak
@@ -45,4 +45,7 @@ public abstract class Shape {
     public void setSelected(boolean select){
         figureSelected = select;
     }
+
+    @Override
+    public abstract Shape clone();
 }

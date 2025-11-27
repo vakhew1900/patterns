@@ -1,5 +1,7 @@
 package graphics.tools;
 
+import graphics.command.CommandContainer;
+import graphics.command.EraseCommand;
 import graphics.crud.DrawingService;
 
 import java.awt.*;
@@ -10,8 +12,8 @@ import java.awt.event.MouseEvent;
  */
 public class EraseTool extends Tool {
 
-    public EraseTool(DrawingService dao) {
-        super(dao);
+    public EraseTool(DrawingService service) {
+        super(service);
     }
 
     @Override
@@ -22,8 +24,8 @@ public class EraseTool extends Tool {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        Point currPoint = e.getPoint();
-        getDao().delete(currPoint);
+        CommandContainer.getInstance()
+                .executeCommand(new EraseCommand(getService(), e.getPoint()));
     }
 
     @Override

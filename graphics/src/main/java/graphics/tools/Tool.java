@@ -15,12 +15,11 @@ import java.util.Stack;
 public abstract class Tool {
 
     @Getter
-    private DrawingService dao;
+    private final DrawingService service;
     protected Stack<Shape> deleteOnUndo = new Stack<>();
 
-    // Konstruktor za singleton
-    public Tool(DrawingService dao){
-        this.dao = dao;
+    public Tool(DrawingService service){
+        this.service = service;
     }
 
     public abstract void mousePressed(MouseEvent e);

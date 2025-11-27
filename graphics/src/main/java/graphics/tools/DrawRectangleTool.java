@@ -38,10 +38,6 @@ public class DrawRectangleTool extends DrawTool {
         return ShapeEnum.RECTANGLE;
     }
 
-    @Override
-    public void mouseReleased(MouseEvent e) {
-        mouseDrag(e);
-    }
 
     @Override
     public void mouseClicked(MouseEvent e) {}

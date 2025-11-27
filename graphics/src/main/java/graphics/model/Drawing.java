@@ -1,6 +1,8 @@
 package graphics.model;
 
 import graphics.model.shapes.Shape;
+import graphics.support.snapshot.Memento;
+import graphics.support.snapshot.Original;
 import lombok.AllArgsConstructor;
 
 import java.awt.*;
@@ -8,13 +10,13 @@ import java.util.*;
 import java.util.List;
 
 @AllArgsConstructor
-public class Drawing implements Iterable<Shape> {
+public class Drawing implements Iterable<Shape>, Original {
     private final List<Shape> shapes;
     private Stack<Shape> undoFigures = new Stack<>();
 
 
     public Drawing(List<Shape> shapes) {
-        this.shapes = shapes;
+        this.shapes = new ArrayList<>(shapes);
     }
 
     public Drawing(Shape... figure){
@@ -84,5 +86,32 @@ public class Drawing implements Iterable<Shape> {
 
     public boolean contains(Shape shape) {
         return shapes.contains(shape);
+    }
+
+    @Override
+    public DrawingMemento save() {
+
+        return new DrawingMemento(
+                shapes
+                        .stream()
+                        .map(Shape::clone)
+                        .toList()
+        );
+    }
+
+
+    public static class DrawingMemento implements Memento {
+
+
+        public List<Shape> shapes;
+
+        public DrawingMemento(List<Shape> shapes) {
+            this.shapes = shapes;
+        }
+
+        @Override
+        public Drawing restore() {
+            return new Drawing(shapes);
+        }
     }
 }

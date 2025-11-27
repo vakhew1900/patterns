@@ -18,10 +18,6 @@ public class DrawLineTool extends DrawTool {
         super(dao);
     }
 
-    @Override
-    public void mouseReleased(MouseEvent e){
-        mouseDrag(e); // pozivamo drag da bi se zavrsio
-    }
 
     @Override
     public void mouseClicked(MouseEvent e){}
