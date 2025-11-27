@@ -21,7 +21,6 @@ import java.util.*;
  */
 public class MainForm extends JFrame implements ColorChangedListener {
 
-    // Toolbar elements
     private final JPanel toolbar = new JPanel(new FlowLayout(FlowLayout.LEFT));
     private final FileService fileService = new FileService();
     public ButtonGroup toolsGroup = new ButtonGroup();
@@ -32,7 +31,6 @@ public class MainForm extends JFrame implements ColorChangedListener {
     private final WorkPanel workPanel;
     private final ToolController toolController;
 
-    // Status bar
     private final JPanel statusbar = new JPanel(new GridLayout(1,2));
     public static JLabel leftLabel, rightLabel;
 
@@ -81,14 +79,11 @@ public class MainForm extends JFrame implements ColorChangedListener {
     }
 
     private void makeMenu(){
-        // Menu
         JMenuBar menuBar = new JMenuBar();
 
-        // File meni
         JMenu file = new JMenu("File");
         menuBar.add(file);
 
-        // Novi fajl
         JMenuItem newFile = new JMenuItem("New Drawing");
         newFile.addActionListener(e -> {
             workPanel.getDrawingService().deleteAll();
@@ -112,7 +107,6 @@ public class MainForm extends JFrame implements ColorChangedListener {
         });
         file.add(save);
 
-        // Save as
         JMenuItem load = new JMenuItem("Load");
         load.addActionListener((e)->{
             JFileChooser loadFileDialog = new JFileChooser();
@@ -131,12 +125,9 @@ public class MainForm extends JFrame implements ColorChangedListener {
         file.add(load);
         file.addSeparator();
 
-        // Close this
         JMenuItem closeThis = new JMenuItem("Close This");
         closeThis.addActionListener(e -> {
             workPanel.getDrawingService().deleteAll();
-//            workPanel.clear();
-//            workPanel.repaint();
         });
         file.add(closeThis);
 
@@ -145,10 +136,8 @@ public class MainForm extends JFrame implements ColorChangedListener {
         quit.addActionListener((e)-> dispose());
         file.add(quit);
 
-        // Help menu
         JMenu help = new JMenu("Help");
 
-        // Undo i  redo
         JMenuItem undo = new JMenuItem("Undo");
         JMenuItem redo = new JMenuItem("Redo");
 
@@ -170,18 +159,15 @@ public class MainForm extends JFrame implements ColorChangedListener {
         setJMenuBar(menuBar);
     }
 
-    // Fill the toolbar
     private void makeTools(Set<String> toolNames){
         toolbar.setBackground(Color.WHITE);
         toolbar.add(new JLabel("Tools:"));
 
-        // Za svako ime alata dodajemo button
         for(String toolName : toolNames){
             JButton newBtn = new JButton(toolName);
             toolsGroup.add(newBtn);
             toolbar.add(newBtn);
 
-            // Dodavanje eventa
             newBtn.addActionListener((e) -> {
                 toolController.setCurrentTool(toolName);
                 currentToolName = toolName;
@@ -189,7 +175,6 @@ public class MainForm extends JFrame implements ColorChangedListener {
             });
         }
 
-        // Dodavanje dodavanje debljine linije
         toolbar.add(new JLabel("Line thick:"));
         toolbar.add(lineThick);
 
@@ -200,7 +185,6 @@ public class MainForm extends JFrame implements ColorChangedListener {
     private void makeStatus(){
         statusbar.setBackground(Color.LIGHT_GRAY);
 
-        // Postavljanje labela
         leftLabel = new JLabel( currentToolName + " selected", JLabel.LEFT);
         updateStatus();
         rightLabel = new JLabel("", JLabel.RIGHT);
