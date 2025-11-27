@@ -4,6 +4,7 @@ import graphics.crud.DrawingService;
 import graphics.model.shapes.Rectangle;
 import graphics.model.shapes.ShapeEnum;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 
@@ -14,8 +15,8 @@ public class DrawRectangleTool extends DrawTool {
 
     public static final String NAME = "Rectangle";
 
-    public DrawRectangleTool(DrawingService dao) {
-        super(dao);
+    public DrawRectangleTool(DrawingService dao, JLabel logger) {
+        super(dao, logger);
     }
 
     @Override

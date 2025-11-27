@@ -4,6 +4,7 @@ import graphics.crud.DrawingService;
 import graphics.model.shapes.Line;
 import graphics.model.shapes.ShapeEnum;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.math.RoundingMode;
@@ -16,8 +17,8 @@ public class DrawLineTool extends DrawTool {
 
     public static final String NAME = "Line";
 
-    public DrawLineTool(DrawingService dao) {
-        super(dao);
+    public DrawLineTool(DrawingService dao, JLabel logger) {
+        super(dao, logger);
     }
 
 

@@ -12,6 +12,7 @@ import graphics.model.shapes.ShapeEnum;
 import graphics.support.fabric.ShapeFabric;
 import lombok.Getter;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 
@@ -22,8 +23,8 @@ public abstract class DrawTool extends Tool implements ColorChangedListener, Lin
     private Color color;
     protected Shape shape;
 
-    public DrawTool(DrawingService dao) {
-        super(dao);
+    public DrawTool(DrawingService dao, JLabel logger) {
+        super(dao, logger);
     }
 
     @Override
@@ -47,7 +48,7 @@ public abstract class DrawTool extends Tool implements ColorChangedListener, Lin
         CommandContainer.getInstance().executeCommand(
                 new DrawShapeCommand(getService(), shape, e.getPoint())
         );
-        MainForm.rightLabel.setText(log());
+        logger.setText(log());
     }
 
     @Override
@@ -55,7 +56,7 @@ public abstract class DrawTool extends Tool implements ColorChangedListener, Lin
         CommandContainer.getInstance().executeCommand(
                 new DrawShapeCommand(getService(), shape, e.getPoint())
         );
-        MainForm.rightLabel.setText(log());
+        logger.setText(log());
     }
 
     @Override

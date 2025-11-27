@@ -32,7 +32,8 @@ public class MainForm extends JFrame implements ColorChangedListener {
     private final ToolController toolController;
 
     private final JPanel statusbar = new JPanel(new GridLayout(1,2));
-    public static JLabel leftLabel, rightLabel;
+    private JLabel leftLabel;
+    private final JLabel rightLabel =  new JLabel("", JLabel.RIGHT);;
 
     private final PopupDialog aboutDialog = new PopupDialog(this, "About", "© Матија Лукић 2017 ЕТФ Београд");
     private String currentToolName;
@@ -42,10 +43,10 @@ public class MainForm extends JFrame implements ColorChangedListener {
         Drawing drawing = new Drawing();
         DrawingService service = new DrawingService(drawing);
         lineColor.addColorChangedListener(this);
-        DrawLineTool drawLineTool = new DrawLineTool(service);
-        DrawRectangleTool drawRectangleTool = new DrawRectangleTool(service);
-        EraseTool eraseTool = new EraseTool(service);
-        MoveTool moveTool = new MoveTool(service);
+        DrawLineTool drawLineTool = new DrawLineTool(service, rightLabel);
+        DrawRectangleTool drawRectangleTool = new DrawRectangleTool(service, rightLabel);
+        EraseTool eraseTool = new EraseTool(service, rightLabel);
+        MoveTool moveTool = new MoveTool(service, rightLabel);
 
         toolController = new ToolController();
         toolController.registerTool(drawLineTool);
@@ -184,7 +185,6 @@ public class MainForm extends JFrame implements ColorChangedListener {
 
         leftLabel = new JLabel( currentToolName + " selected", JLabel.LEFT);
         updateStatus();
-        rightLabel = new JLabel("", JLabel.RIGHT);
         statusbar.add(leftLabel);
         statusbar.add(rightLabel);
 

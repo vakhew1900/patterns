@@ -7,6 +7,7 @@ import graphics.command.SelectMovingShapeCommand;
 import graphics.crud.DrawingService;
 import graphics.model.shapes.Shape;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -21,8 +22,8 @@ public class MoveTool extends Tool {
 
     private Shape figuraToMove;
 
-    public MoveTool(DrawingService dao) {
-        super(dao);
+    public MoveTool(DrawingService dao, JLabel logger) {
+        super(dao, logger);
     }
 
 
@@ -73,7 +74,7 @@ public class MoveTool extends Tool {
         CommandContainer.getInstance()
                 .executeCommand(new MoveCommand(getService(), false, figuraToMove, e.getPoint()));
 
-        MainForm.rightLabel.setText("X:" + e.getPoint().getX() + " Y:" + e.getPoint().getY());
+        logger.setText("X:" + e.getPoint().getX() + " Y:" + e.getPoint().getY());
 
     }
 

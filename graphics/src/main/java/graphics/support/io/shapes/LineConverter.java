@@ -1,12 +1,10 @@
 package graphics.support.io.shapes;
 
 import graphics.model.shapes.Line;
-import graphics.model.shapes.Rectangle;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class LineConverter extends ShapeConverter<Line> {
 
