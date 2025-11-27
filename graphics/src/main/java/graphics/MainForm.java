@@ -25,8 +25,6 @@ public class MainForm extends JFrame implements ColorChangedListener {
     private final JPanel toolbar = new JPanel(new FlowLayout(FlowLayout.LEFT));
     private final FileService fileService = new FileService();
     public ButtonGroup toolsGroup = new ButtonGroup();
-    //public static final String[] toolNames = new String[]{ "Move", "Erase", "Line", "Lines", "Closed Lines", "Rectangle"};
-
 
     private final LineThickButton lineThick = new LineThickButton(new Integer[]{1,2,3,4,5});
     private final ColorChooserButton lineColor = new ColorChooserButton(Color.BLACK);
@@ -94,17 +92,12 @@ public class MainForm extends JFrame implements ColorChangedListener {
         JMenuItem newFile = new JMenuItem("New Drawing");
         newFile.addActionListener(e -> {
             workPanel.getDrawingService().deleteAll();
-//            workPanel.clear();
-//            workPanel.repaint();
         });
         file.add(newFile);
         file.addSeparator();
 
-        // Save - zapamti
         JMenuItem save = new JMenuItem("Save");
-        // Zapmti
         save.addActionListener((e) -> {
-            // file chooser
             JFileChooser saveFileDialog = new JFileChooser();
 
             if(saveFileDialog.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {

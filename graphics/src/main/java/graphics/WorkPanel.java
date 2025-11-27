@@ -1,5 +1,7 @@
 package graphics;
 
+import graphics.command.CommandContainer;
+import graphics.command.RepaintDrawingCommand;
 import graphics.controller.ToolController;
 import graphics.crud.DrawingService;
 import graphics.listener.DrawingChangedListener;
@@ -30,7 +32,7 @@ public class WorkPanel extends JPanel implements DrawingChangedListener {
     }
 
     public void openNewDrawing(Drawing newdrawing){
-        drawingService.repaintDrawing(newdrawing);
+        CommandContainer.getInstance().executeCommand(new RepaintDrawingCommand(drawingService, newdrawing));
     }
 
     @Override
