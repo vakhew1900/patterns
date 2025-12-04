@@ -1,5 +1,8 @@
 package graphics.controller;
 
+import graphics.command.DrawingCommand;
+import graphics.command.UnselectCommand;
+import graphics.crud.DrawingService;
 import graphics.tools.Tool;
 
 import java.awt.event.MouseAdapter;
@@ -11,8 +14,11 @@ import java.util.Set;
 public class ToolController extends MouseAdapter {
     private final Map<String, Tool> tools = new HashMap<>();
     private Tool currentTool;
+    private DrawingService drawingService;
 
-
+    public ToolController(DrawingService drawingService) {
+        this.drawingService = drawingService;
+    }
 
     public void registerTool(Tool tool) {
         tools.put(tool.getName(), tool);
@@ -22,6 +28,7 @@ public class ToolController extends MouseAdapter {
         Tool tool = tools.get(toolName);
         if (tool != null) {
             this.currentTool = tool;
+            new UnselectCommand(drawingService).execute();
         }
     }
 

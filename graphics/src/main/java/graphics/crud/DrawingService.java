@@ -64,6 +64,15 @@ public class DrawingService {
         }
     }
 
+    public void  unselect() {
+        drawing.forEach(
+                shape -> {
+                    shape.setSelected(false);
+                }
+        );
+        notifyListeners();
+    }
+
     public void repaintDrawing(Drawing drawing) {
         this.drawing.deleteAll();;
         this.drawing.addAll(drawing);

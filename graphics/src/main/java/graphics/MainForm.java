@@ -48,7 +48,7 @@ public class MainForm extends JFrame implements ColorChangedListener {
         EraseTool eraseTool = new EraseTool(service, rightLabel);
         MoveTool moveTool = new MoveTool(service, rightLabel);
 
-        toolController = new ToolController();
+        toolController = new ToolController(service);
         toolController.registerTool(drawLineTool);
         toolController.registerTool(eraseTool);
         toolController.registerTool(moveTool);
