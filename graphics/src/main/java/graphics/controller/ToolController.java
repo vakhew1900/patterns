@@ -1,6 +1,5 @@
 package graphics.controller;
 
-import graphics.command.DrawingCommand;
 import graphics.command.UnselectCommand;
 import graphics.crud.DrawingService;
 import graphics.tools.Tool;

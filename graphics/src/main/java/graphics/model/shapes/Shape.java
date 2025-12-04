@@ -27,7 +27,7 @@ public abstract class Shape implements Cloneable{
         lineColor = color;
     }
 
-    public abstract void update(Point point);
+    public abstract void resize(Point point);
 
     public abstract void paint(Graphics2D g); // paint figure
 

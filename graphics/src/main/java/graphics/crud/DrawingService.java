@@ -3,7 +3,6 @@ package graphics.crud;
 import graphics.listener.DrawingChangedListener;
 import graphics.model.Drawing;
 import graphics.model.shapes.Shape;
-import graphics.support.snapshot.Memento;
 import lombok.Getter;
 
 import java.awt.*;
@@ -45,7 +44,7 @@ public class DrawingService {
 
     public void update(Shape shape, Point point) {
         if (drawing.contains(shape)) {
-            shape.update(point);
+            shape.resize(point);
             notifyListeners();
         }
     }

@@ -7,12 +7,10 @@ import graphics.crud.DrawingService;
 import graphics.listener.DrawingChangedListener;
 import graphics.model.Drawing;
 import graphics.model.shapes.Shape;
-import graphics.tools.*;
 import lombok.Getter;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
 
 
 @Getter

@@ -53,8 +53,7 @@ public class Rectangle extends Shape  {
 
 
     @Override
-    public void update(Point point) {
-        System.out.println(point);
+    public void resize(Point point) {
         setEndPoint(point);
     }
 

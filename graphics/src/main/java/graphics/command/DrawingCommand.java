@@ -3,7 +3,7 @@ package graphics.command;
 import graphics.crud.DrawingService;
 import graphics.model.Drawing;
 
-public abstract class DrawingCommand implements Command, isHistoryNeedle {
+public abstract class DrawingCommand implements Command, isHistorical {
 
     protected final DrawingService drawingService;
     private final Drawing.DrawingMemento backup;

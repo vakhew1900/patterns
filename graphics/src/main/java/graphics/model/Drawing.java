@@ -62,28 +62,6 @@ public class Drawing implements Iterable<Shape>, Original {
         return shapes.iterator();
     }
 
-
-    public void undo(){
-        if(!shapes.isEmpty()) {
-            Shape lastFigura = shapes.getLast();
-            undoFigures.push(lastFigura);
-            shapes.removeLast();
-        }
-    }
-
-
-    public void redo(){
-        if(!undoFigures.empty()){
-            Shape redoFigure = undoFigures.pop();
-            add(redoFigure);
-        }
-    }
-
-    public void copy(Drawing newdrawing) {
-        deleteAll();;
-        shapes.addAll(newdrawing.shapes);
-    }
-
     public boolean contains(Shape shape) {
         return shapes.contains(shape);
     }

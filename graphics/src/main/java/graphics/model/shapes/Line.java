@@ -57,7 +57,7 @@ public class Line extends Shape {
 
 
     @Override
-    public void update(Point point) {
+    public void resize(Point point) {
         setNewEnd(point);
     }
 
