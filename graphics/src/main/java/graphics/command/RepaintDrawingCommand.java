@@ -7,7 +7,7 @@ public class RepaintDrawingCommand extends DrawingCommand{
 
     private final Drawing drawing;
     public RepaintDrawingCommand(DrawingService drawingService, Drawing drawing) {
-        super(drawingService, true);
+        super(drawingService);
         this.drawing =drawing;
     }
 

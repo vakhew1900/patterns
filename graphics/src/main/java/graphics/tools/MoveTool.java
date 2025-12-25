@@ -1,9 +1,7 @@
 package graphics.tools;
 
-import graphics.*;
 import graphics.command.CommandContainer;
 import graphics.command.MoveCommand;
-import graphics.command.SelectMovingShapeCommand;
 import graphics.crud.DrawingService;
 import graphics.model.shapes.Shape;
 
@@ -20,7 +18,8 @@ public class MoveTool extends Tool {
 
     public static final String NAME = "Move";
 
-    private Shape figuraToMove;
+    private Shape shape;
+    private Shape prevShape;
 
     public MoveTool(DrawingService dao, JLabel logger) {
         super(dao, logger);
@@ -46,34 +45,30 @@ public class MoveTool extends Tool {
         Point fromPos = e.getPoint();
         Shape newFigure = getService().get(fromPos);
 
-        if (figuraToMove != null && newFigure != null) { // Ako postoje i stara i nova selektovana gasimo selektovanost za staru
-            getService().select(figuraToMove, false); // Ponistavamo selektovani flag
+        if (shape != null && newFigure != null) {
+            getService().select(shape, false);
         }
 
-        if (newFigure != null) { // Ako postoji nova figura selektujemo nju
-            figuraToMove = newFigure;  figuraToMove.setSelected(true); // selektovan je novi
-            getService().select(figuraToMove, true); // P
+        if (newFigure != null) {
+            shape = newFigure;
+            shape.setSelected(true);
+            getService().select(shape, true);
         }
 
-        CommandContainer
-                .getInstance()
-                .executeCommand(new SelectMovingShapeCommand(getService(), figuraToMove, fromPos));
+        prevShape = shape.clone();
+        getService().catchNew(shape, e.getPoint());
+//        CommandContainer.getInstance().executeCommand(new MoveCommand(getService(), shape, e.getPoint()));
     }
 
     @Override
     public void mouseReleased(MouseEvent e){
-        CommandContainer.getInstance()
-                .executeCommand(new MoveCommand(getService(), true, figuraToMove, e.getPoint()));
+        shape.setPoints(prevShape.getPoints());
+        CommandContainer.getInstance().executeCommand(new MoveCommand(getService(), prevShape, shape, e.getPoint()));
     }
 
     @Override
     public void mouseDrag(MouseEvent e){
-
-        System.out.println("Firua koju pomeramo : " + figuraToMove);
-
-        CommandContainer.getInstance()
-                .executeCommand(new MoveCommand(getService(), false, figuraToMove, e.getPoint()));
-
+        getService().moveNew(shape,  e.getPoint());
         logger.setText("X:" + e.getPoint().getX() + " Y:" + e.getPoint().getY());
 
     }

@@ -37,16 +37,16 @@ public class Rectangle extends Shape  {
     @Override
     public void setPoints(ArrayList<Point> newPoints){ // Postavi nove tacke
         if (newPoints != null) {
-            this.startPoint = newPoints.get(0);
-            this.endPoint = newPoints.get(1);
+            this.startPoint = (Point) newPoints.get(0).clone();
+            this.endPoint = (Point) newPoints.get(1).clone();
         }
     }
 
     @Override
     public ArrayList<Point> getPoints(){
         ArrayList<Point> retList = new ArrayList<>();
-        retList.add(startPoint);
-        retList.add(endPoint);
+        retList.add((Point) startPoint.clone());
+        retList.add((Point) endPoint.clone());
 
         return retList;
     }

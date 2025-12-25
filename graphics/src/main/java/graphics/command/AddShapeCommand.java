@@ -11,7 +11,7 @@ public class AddShapeCommand extends DrawingCommand {
             DrawingService drawingService,
             Shape shape
     ) {
-        super(drawingService, true);
+        super(drawingService);
         this.shape = shape;
     }
 

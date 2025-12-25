@@ -3,25 +3,18 @@ package graphics.command;
 import graphics.crud.DrawingService;
 import graphics.model.Drawing;
 
-public abstract class DrawingCommand implements Command, isHistorical {
+public abstract class DrawingCommand implements Command {
 
     protected final DrawingService drawingService;
     private final Drawing.DrawingMemento backup;
-    protected boolean isHistoryNeed;
 
-    public DrawingCommand(DrawingService drawingService, boolean isHistoryNeed) {
+    public DrawingCommand(DrawingService drawingService) {
         this.drawingService = drawingService;
         this.backup = drawingService.snapshot();
-        this.isHistoryNeed = isHistoryNeed;
     }
 
     @Override
     public void undo() {
         drawingService.repaintDrawing(backup.restore());
-    }
-
-    @Override
-    public boolean isNeedHistory() {
-        return isHistoryNeed;
     }
 }

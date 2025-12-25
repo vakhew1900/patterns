@@ -1,6 +1,5 @@
 package graphics.controller;
 
-import graphics.command.UnselectCommand;
 import graphics.crud.DrawingService;
 import graphics.tools.Tool;
 
@@ -27,7 +26,8 @@ public class ToolController extends MouseAdapter {
         Tool tool = tools.get(toolName);
         if (tool != null) {
             this.currentTool = tool;
-            new UnselectCommand(drawingService).execute();
+            drawingService.unselect();
+            System.out.println("unselect");
         }
     }
 

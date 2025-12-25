@@ -8,7 +8,7 @@ public class EraseCommand extends DrawingCommand {
 
     private Point coordinate;
     public EraseCommand(DrawingService drawingService, Point coordinate) {
-        super(drawingService, true);
+        super(drawingService);
         this.coordinate = coordinate;
     }
 

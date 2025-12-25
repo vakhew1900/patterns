@@ -18,13 +18,18 @@ public class CommandContainer {
 
     public void executeCommand(DrawingCommand command) {
         command.execute();
-        if (command.isNeedHistory()) {
-            undoStack.push(command);
-        }
+
+        System.out.println(command.getClass());
+
+
+        undoStack.push(command);
         redoStack.clear();
     }
 
     public void undo() {
+
+        System.out.println(undoStack.size());
+
         if (!undoStack.isEmpty()) {
             DrawingCommand command = undoStack.pop();
             redoStack.push(command);
