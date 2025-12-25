@@ -113,6 +113,11 @@ public class Rectangle extends Shape  {
 
     @Override
     public Rectangle clone() {
-        return new Rectangle((Point) startPoint.clone(), (Point) endPoint.clone(), lineThick, new Color(lineColor.getRGB()));
+        var rectangle = new Rectangle((Point) startPoint.clone(), (Point) endPoint.clone(), lineThick, new Color(lineColor.getRGB()));
+
+        if (delta != null) {
+            rectangle.setDelta((Point) delta.clone());
+        }
+        return  rectangle;
     }
 }

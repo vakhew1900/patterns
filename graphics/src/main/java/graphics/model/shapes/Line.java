@@ -131,6 +131,10 @@ public class Line extends Shape {
 
     @Override
     public Line clone() {
-        return new Line(List.of((Point) startPoint.clone(), (Point) endPoint.clone()), this.getLineThick(), new Color(getLineColor().getRGB()));
+       Line line = new Line(List.of((Point) startPoint.clone(), (Point) endPoint.clone()), this.getLineThick(), new Color(getLineColor().getRGB()));
+      if (delta != null) {
+          line.setDelta((Point) delta.clone());
+      }
+       return line;
     }
 }

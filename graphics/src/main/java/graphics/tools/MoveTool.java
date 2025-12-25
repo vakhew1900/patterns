@@ -55,8 +55,8 @@ public class MoveTool extends Tool {
             getService().select(shape, true);
         }
 
-        prevShape = shape.clone();
         getService().catchNew(shape, e.getPoint());
+        prevShape = shape.clone();
 //        CommandContainer.getInstance().executeCommand(new MoveCommand(getService(), shape, e.getPoint()));
     }
 

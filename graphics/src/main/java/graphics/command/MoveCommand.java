@@ -21,6 +21,7 @@ public class MoveCommand extends DrawingCommand{
     @Override
     public void execute() {
         shape.setPoints(prevShape.getPoints());
+        shape.setDelta((Point) prevShape.getDelta().clone());
         drawingService.moveNew(shape, point);
     }
 }
