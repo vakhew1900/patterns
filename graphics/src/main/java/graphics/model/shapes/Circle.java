@@ -15,6 +15,14 @@ public class Circle extends Shape {
     private Point center;
     private int radius;
 
+    private final ShapeEnum type = ShapeEnum.CIRCLE;
+
+    @Override
+    public ShapeEnum getType() {
+        return type;
+    }
+
+
     public Circle(Point center, int radius, int thick, Color color) {
         super(thick, color);
         this.center = center;

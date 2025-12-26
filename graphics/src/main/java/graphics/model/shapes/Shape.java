@@ -16,8 +16,8 @@ import java.util.ArrayList;
 public abstract class Shape implements Cloneable{
     protected int lineThick = 1;
     protected Color lineColor = Color.BLACK;
-    protected Point delta; // rastojanje gde je mis uhvatio u odnosu na pocetak
-    protected boolean figureSelected;
+    protected transient Point delta; // rastojanje gde je mis uhvatio u odnosu na pocetak
+    protected transient boolean figureSelected;
 
     protected static Color selectionColor = new Color(255,255,0,85);
     protected static int catchCoef = 2;
@@ -26,6 +26,8 @@ public abstract class Shape implements Cloneable{
         lineThick = thick;
         lineColor = color;
     }
+
+    public abstract ShapeEnum getType();
 
     public abstract void resize(Point point);
 

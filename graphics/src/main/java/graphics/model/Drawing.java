@@ -3,17 +3,13 @@ package graphics.model;
 import graphics.model.shapes.Shape;
 import graphics.support.snapshot.Memento;
 import graphics.support.snapshot.Original;
-import lombok.AllArgsConstructor;
 
 import java.awt.*;
 import java.util.*;
 import java.util.List;
 
-@AllArgsConstructor
 public class Drawing implements Iterable<Shape>, Original {
     private final List<Shape> shapes;
-    private Stack<Shape> undoFigures = new Stack<>();
-
 
     public Drawing(List<Shape> shapes) {
         this.shapes = new ArrayList<>(shapes);

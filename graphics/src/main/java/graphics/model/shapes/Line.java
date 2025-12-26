@@ -16,6 +16,13 @@ public class Line extends Shape {
     private Point endPoint;
     private Point startPoint;
 
+    private final ShapeEnum type = ShapeEnum.LINE;
+
+    @Override
+    public ShapeEnum getType() {
+        return type;
+    }
+
 
     public Line(Point startPoint, Point endPoint, int thick, Color color){
         super(thick, color);

@@ -17,6 +17,7 @@ public class Rectangle extends Shape  {
     @Setter
     private Point endPoint;
     private Point startPoint;
+    private final ShapeEnum type = ShapeEnum.RECTANGLE;
 
     public Rectangle(Point startPoint, Point endPoint, int thick, Color color) {
         super(thick, color);
@@ -51,6 +52,11 @@ public class Rectangle extends Shape  {
         return retList;
     }
 
+
+    @Override
+    public ShapeEnum getType() {
+        return type;
+    }
 
     @Override
     public void resize(Point point) {

@@ -29,7 +29,6 @@ public class FileService {
 
             while ((line = reader.readLine()) != null) {
                 stringBuilder.append(line);
-                stringBuilder.append(DrawingConverter.SPLITTER);
             }
 
             return drawingConverter.deserialize(stringBuilder.toString());
