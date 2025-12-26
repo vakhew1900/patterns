@@ -1,9 +1,8 @@
 package graphics.support.fabric;
 
-import graphics.model.shapes.Line;
+import graphics.model.shapes.*;
 import graphics.model.shapes.Rectangle;
 import graphics.model.shapes.Shape;
-import graphics.model.shapes.ShapeEnum;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -13,6 +12,7 @@ public class ShapeFabric {
        return switch (type) {
            case LINE -> new Line(point, point, lineThick, color);
            case RECTANGLE -> new Rectangle(point, point, lineThick, color);
+           case CIRCLE -> new Circle(point, 0, lineThick, color);
         };
     }
 }

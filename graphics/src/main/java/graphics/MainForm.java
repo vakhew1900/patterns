@@ -44,12 +44,14 @@ public class MainForm extends JFrame implements ColorChangedListener {
         DrawingService service = new DrawingService(drawing);
         lineColor.addColorChangedListener(this);
         DrawLineTool drawLineTool = new DrawLineTool(service, rightLabel);
+        DrawCircleTool drawCircleTool = new DrawCircleTool(service, rightLabel);
         DrawRectangleTool drawRectangleTool = new DrawRectangleTool(service, rightLabel);
         EraseTool eraseTool = new EraseTool(service, rightLabel);
         MoveTool moveTool = new MoveTool(service, rightLabel);
 
         toolController = new ToolController(service);
         toolController.registerTool(drawLineTool);
+        toolController.registerTool(drawCircleTool);
         toolController.registerTool(eraseTool);
         toolController.registerTool(moveTool);
         toolController.registerTool(drawRectangleTool);
@@ -69,9 +71,11 @@ public class MainForm extends JFrame implements ColorChangedListener {
 
         lineColor.addColorChangedListener(drawLineTool);
         lineColor.addColorChangedListener(drawRectangleTool);
+        lineColor.addColorChangedListener(drawCircleTool);
         lineColor.setSelectedColor(Color.BLACK);
         lineThick.addLineThickChangedListener(drawLineTool);
         lineThick.addLineThickChangedListener(drawRectangleTool);
+        lineThick.addLineThickChangedListener(drawCircleTool);
 
         setVisible(true);
     }

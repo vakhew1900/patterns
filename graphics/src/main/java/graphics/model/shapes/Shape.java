@@ -20,7 +20,7 @@ public abstract class Shape implements Cloneable{
     protected boolean figureSelected;
 
     protected static Color selectionColor = new Color(255,255,0,85);
-    protected static int catchCoef = 2; // lineThick * catchCoef = click to select area
+    protected static int catchCoef = 2;
 
     public Shape(int thick, Color color) {
         lineThick = thick;
@@ -29,16 +29,16 @@ public abstract class Shape implements Cloneable{
 
     public abstract void resize(Point point);
 
-    public abstract void paint(Graphics2D g); // paint figure
+    public abstract void paint(Graphics2D g);
 
-    public abstract boolean selected(Point coord); // da li je selektovana
+    public abstract boolean selected(Point coord);
 
-    public abstract void move(Point delta); // pomeri figuru
+    public abstract void move(Point delta);
 
-    public abstract void moveNew(Point newPos); // pomeri na novu
+    public abstract void moveNew(Point newPos);
 
-    public abstract void setPoints(ArrayList<Point> points); // Postavi nove tacke
-    public abstract ArrayList<Point> getPoints(); // Dohvati tacke
+    public abstract void setPoints(ArrayList<Point> points);
+    public abstract ArrayList<Point> getPoints();
 
     public abstract void setNewCatch(Point catchPos);
     // Podesava da li je selektovan
