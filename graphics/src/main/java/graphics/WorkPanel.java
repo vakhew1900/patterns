@@ -7,6 +7,8 @@ import graphics.crud.DrawingService;
 import graphics.listener.DrawingChangedListener;
 import graphics.model.Drawing;
 import graphics.model.shapes.Shape;
+import graphics.render.ShapeRender;
+import graphics.render.SwingShapeRender;
 import lombok.Getter;
 
 import javax.swing.*;
@@ -36,8 +38,9 @@ public class WorkPanel extends JPanel implements DrawingChangedListener {
 
         if(drawingService.getDrawing() != null) {
             Graphics2D graph =  (Graphics2D)g;
+            ShapeRender render = new SwingShapeRender(graph);
             for(Shape toPaint : drawingService.getDrawing()){
-                toPaint.paint(graph);
+                toPaint.paint(render);
             }
         }
     }

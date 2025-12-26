@@ -1,5 +1,6 @@
 package graphics.model.shapes;
 
+import graphics.render.ShapeRender;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -64,22 +65,22 @@ public class Rectangle extends Shape  {
     }
 
     @Override
-    public void paint(Graphics2D g) {
+    public void paint(ShapeRender g) {
         if(figureSelected){
             g.setColor(selectionColor);
             g.setStroke(new BasicStroke(lineThick * 3, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
 
-            iscrtajLinije(g);
+            drawRectangle(g);
         }
 
         g.setColor(lineColor);
         g.setStroke(new BasicStroke(lineThick));
 
-        iscrtajLinije(g);
+        drawRectangle(g);
 
     }
 
-    public void iscrtajLinije(Graphics2D g){
+    public void drawRectangle(ShapeRender g){
         g.drawLine(startPoint.x, startPoint.y, endPoint.x, startPoint.y);
         g.drawLine(startPoint.x, startPoint.y, startPoint.x, endPoint.y);
         g.drawLine(endPoint.x, endPoint.y, endPoint.x, startPoint.y);

@@ -1,5 +1,6 @@
 package graphics.model.shapes;
 
+import graphics.render.ShapeRender;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -31,7 +32,7 @@ public abstract class Shape implements Cloneable{
 
     public abstract void resize(Point point);
 
-    public abstract void paint(Graphics2D g);
+    public abstract void paint(ShapeRender render);
 
     public abstract boolean selected(Point coord);
 

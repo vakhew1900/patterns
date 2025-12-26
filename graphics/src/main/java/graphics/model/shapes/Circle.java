@@ -1,5 +1,6 @@
 package graphics.model.shapes;
 
+import graphics.render.ShapeRender;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -78,7 +79,7 @@ public class Circle extends Shape {
     }
 
     @Override
-    public void paint(Graphics2D g) {
+    public void paint(ShapeRender g) {
         int diameter = radius * 2;
 
         if (figureSelected) {

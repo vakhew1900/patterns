@@ -33,7 +33,6 @@ public class ColorChooserButton extends JButton {
 
         current = newColor;
         setIcon(createIcon(current, 16, 16));
-        repaint();
 
         if (notify) {
             // Notify everybody that may be interested.

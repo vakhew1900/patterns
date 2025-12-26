@@ -1,5 +1,6 @@
 package graphics.model.shapes;
 
+import graphics.render.ShapeRender;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 
@@ -68,20 +69,20 @@ public class Line extends Shape {
         setNewEnd(point);
     }
 
-    public void paint(Graphics2D g){
+    public void paint(ShapeRender g){
         if(figureSelected) { // Ako je selektovano
             g.setColor(selectionColor);
             g.setStroke(new BasicStroke(3 * lineThick, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
-            iscrtajLinije(g);
+            drawLine(g);
         }
 
 
         g.setColor(lineColor);
         g.setStroke(new BasicStroke(lineThick));
-        iscrtajLinije(g);
+        drawLine(g);
     }
 
-    public void iscrtajLinije(Graphics2D g){
+    public void drawLine(ShapeRender g){
         g.drawLine(startPoint.x, startPoint.y, endPoint.x, endPoint.y);
 
     }
